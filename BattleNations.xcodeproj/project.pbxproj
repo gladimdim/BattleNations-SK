@@ -22,6 +22,24 @@
 		F20688721768EFBD00771F36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F20688511768EFBD00771F36 /* UIKit.framework */; };
 		F206887A1768EFBD00771F36 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F20688781768EFBD00771F36 /* InfoPlist.strings */; };
 		F206887C1768EFBD00771F36 /* BattleNationsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F206887B1768EFBD00771F36 /* BattleNationsTests.m */; };
+		F20688861768F03000771F36 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F20688851768F03000771F36 /* SpriteKit.framework */; };
+		F206888A1768F31700771F36 /* HelloScene.m in Sources */ = {isa = PBXBuildFile; fileRef = F20688891768F13400771F36 /* HelloScene.m */; };
+		F25619A41768FE0F00008E34 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F206888D1768FD0800771F36 /* FirstViewController.m */; };
+		F25619B0176900CB00008E34 /* DataPoster.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619A9176900B000008E34 /* DataPoster.m */; };
+		F25619B1176900CB00008E34 /* ListOfGamesGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619AB176900B000008E34 /* ListOfGamesGetter.m */; };
+		F25619B2176900CB00008E34 /* NewGame.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619AD176900B000008E34 /* NewGame.m */; };
+		F25619B3176900CB00008E34 /* UserRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619AF176900B000008E34 /* UserRegister.m */; };
+		F25619B4176900CB00008E34 /* ListOfGamesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619A61769008000008E34 /* ListOfGamesViewController.m */; };
+		F25619BD1769011F00008E34 /* ArmyBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619B81769011F00008E34 /* ArmyBuilder.m */; };
+		F25619BE1769011F00008E34 /* Poland.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619BA1769011F00008E34 /* Poland.m */; };
+		F25619BF1769011F00008E34 /* UkraineInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619BC1769011F00008E34 /* UkraineInfo.m */; };
+		F25619C81769012E00008E34 /* Animator.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619C11769012E00008E34 /* Animator.m */; };
+		F25619C91769012E00008E34 /* GameDictProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619C31769012E00008E34 /* GameDictProcessor.m */; };
+		F25619CA1769012E00008E34 /* GameLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619C51769012E00008E34 /* GameLogic.m */; };
+		F25619CB1769012E00008E34 /* RecordPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619C71769012E00008E34 /* RecordPlayer.m */; };
+		F25619D017690A9600008E34 /* flag_poland.png in Resources */ = {isa = PBXBuildFile; fileRef = F25619CE17690A9600008E34 /* flag_poland.png */; };
+		F25619D117690A9600008E34 /* flag_ukraine.png in Resources */ = {isa = PBXBuildFile; fileRef = F25619CF17690A9600008E34 /* flag_ukraine.png */; };
+		F25619D517690C9D00008E34 /* battle-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F25619D317690C5900008E34 /* battle-icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +73,38 @@
 		F20688771768EFBD00771F36 /* BattleNationsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BattleNationsTests-Info.plist"; sourceTree = "<group>"; };
 		F20688791768EFBD00771F36 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F206887B1768EFBD00771F36 /* BattleNationsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BattleNationsTests.m; sourceTree = "<group>"; };
+		F20688851768F03000771F36 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		F20688881768F13400771F36 /* HelloScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HelloScene.h; path = Scenes/HelloScene.h; sourceTree = "<group>"; };
+		F20688891768F13400771F36 /* HelloScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HelloScene.m; path = Scenes/HelloScene.m; sourceTree = "<group>"; };
+		F206888C1768FD0800771F36 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirstViewController.h; path = Views/FirstViewController.h; sourceTree = "<group>"; };
+		F206888D1768FD0800771F36 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FirstViewController.m; path = Views/FirstViewController.m; sourceTree = "<group>"; };
+		F25619A51769008000008E34 /* ListOfGamesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ListOfGamesViewController.h; path = Views/ListOfGamesViewController.h; sourceTree = "<group>"; };
+		F25619A61769008000008E34 /* ListOfGamesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ListOfGamesViewController.m; path = Views/ListOfGamesViewController.m; sourceTree = "<group>"; };
+		F25619A8176900B000008E34 /* DataPoster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DataPoster.h; path = network/DataPoster.h; sourceTree = "<group>"; };
+		F25619A9176900B000008E34 /* DataPoster.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DataPoster.m; path = network/DataPoster.m; sourceTree = "<group>"; };
+		F25619AA176900B000008E34 /* ListOfGamesGetter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ListOfGamesGetter.h; path = network/ListOfGamesGetter.h; sourceTree = "<group>"; };
+		F25619AB176900B000008E34 /* ListOfGamesGetter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ListOfGamesGetter.m; path = network/ListOfGamesGetter.m; sourceTree = "<group>"; };
+		F25619AC176900B000008E34 /* NewGame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NewGame.h; path = network/NewGame.h; sourceTree = "<group>"; };
+		F25619AD176900B000008E34 /* NewGame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = NewGame.m; path = network/NewGame.m; sourceTree = "<group>"; };
+		F25619AE176900B000008E34 /* UserRegister.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UserRegister.h; path = network/UserRegister.h; sourceTree = "<group>"; };
+		F25619AF176900B000008E34 /* UserRegister.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = UserRegister.m; path = network/UserRegister.m; sourceTree = "<group>"; };
+		F25619B71769011F00008E34 /* ArmyBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArmyBuilder.h; path = GameData/ArmyBuilder.h; sourceTree = "<group>"; };
+		F25619B81769011F00008E34 /* ArmyBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArmyBuilder.m; path = GameData/ArmyBuilder.m; sourceTree = "<group>"; };
+		F25619B91769011F00008E34 /* Poland.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Poland.h; path = GameData/Poland.h; sourceTree = "<group>"; };
+		F25619BA1769011F00008E34 /* Poland.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Poland.m; path = GameData/Poland.m; sourceTree = "<group>"; };
+		F25619BB1769011F00008E34 /* UkraineInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UkraineInfo.h; path = GameData/UkraineInfo.h; sourceTree = "<group>"; };
+		F25619BC1769011F00008E34 /* UkraineInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UkraineInfo.m; path = GameData/UkraineInfo.m; sourceTree = "<group>"; };
+		F25619C01769012E00008E34 /* Animator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animator.h; path = Utilities/Animator.h; sourceTree = "<group>"; };
+		F25619C11769012E00008E34 /* Animator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Animator.m; path = Utilities/Animator.m; sourceTree = "<group>"; };
+		F25619C21769012E00008E34 /* GameDictProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameDictProcessor.h; path = Utilities/GameDictProcessor.h; sourceTree = "<group>"; };
+		F25619C31769012E00008E34 /* GameDictProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameDictProcessor.m; path = Utilities/GameDictProcessor.m; sourceTree = "<group>"; };
+		F25619C41769012E00008E34 /* GameLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameLogic.h; path = Utilities/GameLogic.h; sourceTree = "<group>"; };
+		F25619C51769012E00008E34 /* GameLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameLogic.m; path = Utilities/GameLogic.m; sourceTree = "<group>"; };
+		F25619C61769012E00008E34 /* RecordPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RecordPlayer.h; path = Utilities/RecordPlayer.h; sourceTree = "<group>"; };
+		F25619C71769012E00008E34 /* RecordPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RecordPlayer.m; path = Utilities/RecordPlayer.m; sourceTree = "<group>"; };
+		F25619CE17690A9600008E34 /* flag_poland.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flag_poland.png; path = Resources/flags/flag_poland.png; sourceTree = "<group>"; };
+		F25619CF17690A9600008E34 /* flag_ukraine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flag_ukraine.png; path = Resources/flags/flag_ukraine.png; sourceTree = "<group>"; };
+		F25619D317690C5900008E34 /* battle-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "battle-icon.png"; path = "Resources/Accessory/battle-icon.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F20688861768F03000771F36 /* SpriteKit.framework in Frameworks */,
 				F20688501768EFBD00771F36 /* CoreGraphics.framework in Frameworks */,
 				F20688521768EFBD00771F36 /* UIKit.framework in Frameworks */,
 				F206884E1768EFBD00771F36 /* Foundation.framework in Frameworks */,
@@ -103,6 +154,7 @@
 		F206884C1768EFBD00771F36 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F20688851768F03000771F36 /* SpriteKit.framework */,
 				F206884D1768EFBD00771F36 /* Foundation.framework */,
 				F206884F1768EFBD00771F36 /* CoreGraphics.framework */,
 				F20688511768EFBD00771F36 /* UIKit.framework */,
@@ -114,6 +166,12 @@
 		F20688531768EFBD00771F36 /* BattleNations */ = {
 			isa = PBXGroup;
 			children = (
+				F25619CC17690A8600008E34 /* Resources */,
+				F25619B61769011000008E34 /* GameData */,
+				F25619B51769010200008E34 /* utilities */,
+				F25619A7176900A300008E34 /* network */,
+				F206888B1768FCF300771F36 /* Views */,
+				F20688871768F10E00771F36 /* Scenes */,
 				F206885C1768EFBD00771F36 /* BNAppDelegate.h */,
 				F206885D1768EFBD00771F36 /* BNAppDelegate.m */,
 				F206885F1768EFBD00771F36 /* Main_iPhone.storyboard */,
@@ -153,6 +211,95 @@
 				F20688781768EFBD00771F36 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F20688871768F10E00771F36 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				F20688881768F13400771F36 /* HelloScene.h */,
+				F20688891768F13400771F36 /* HelloScene.m */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		F206888B1768FCF300771F36 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F206888C1768FD0800771F36 /* FirstViewController.h */,
+				F206888D1768FD0800771F36 /* FirstViewController.m */,
+				F25619A51769008000008E34 /* ListOfGamesViewController.h */,
+				F25619A61769008000008E34 /* ListOfGamesViewController.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		F25619A7176900A300008E34 /* network */ = {
+			isa = PBXGroup;
+			children = (
+				F25619A8176900B000008E34 /* DataPoster.h */,
+				F25619A9176900B000008E34 /* DataPoster.m */,
+				F25619AA176900B000008E34 /* ListOfGamesGetter.h */,
+				F25619AB176900B000008E34 /* ListOfGamesGetter.m */,
+				F25619AC176900B000008E34 /* NewGame.h */,
+				F25619AD176900B000008E34 /* NewGame.m */,
+				F25619AE176900B000008E34 /* UserRegister.h */,
+				F25619AF176900B000008E34 /* UserRegister.m */,
+			);
+			name = network;
+			sourceTree = "<group>";
+		};
+		F25619B51769010200008E34 /* utilities */ = {
+			isa = PBXGroup;
+			children = (
+				F25619C01769012E00008E34 /* Animator.h */,
+				F25619C11769012E00008E34 /* Animator.m */,
+				F25619C21769012E00008E34 /* GameDictProcessor.h */,
+				F25619C31769012E00008E34 /* GameDictProcessor.m */,
+				F25619C41769012E00008E34 /* GameLogic.h */,
+				F25619C51769012E00008E34 /* GameLogic.m */,
+				F25619C61769012E00008E34 /* RecordPlayer.h */,
+				F25619C71769012E00008E34 /* RecordPlayer.m */,
+			);
+			name = utilities;
+			sourceTree = "<group>";
+		};
+		F25619B61769011000008E34 /* GameData */ = {
+			isa = PBXGroup;
+			children = (
+				F25619B71769011F00008E34 /* ArmyBuilder.h */,
+				F25619B81769011F00008E34 /* ArmyBuilder.m */,
+				F25619B91769011F00008E34 /* Poland.h */,
+				F25619BA1769011F00008E34 /* Poland.m */,
+				F25619BB1769011F00008E34 /* UkraineInfo.h */,
+				F25619BC1769011F00008E34 /* UkraineInfo.m */,
+			);
+			name = GameData;
+			sourceTree = "<group>";
+		};
+		F25619CC17690A8600008E34 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F25619D217690C4600008E34 /* Accessory */,
+				F25619CD17690A8C00008E34 /* flags */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		F25619CD17690A8C00008E34 /* flags */ = {
+			isa = PBXGroup;
+			children = (
+				F25619CE17690A9600008E34 /* flag_poland.png */,
+				F25619CF17690A9600008E34 /* flag_ukraine.png */,
+			);
+			name = flags;
+			sourceTree = "<group>";
+		};
+		F25619D217690C4600008E34 /* Accessory */ = {
+			isa = PBXGroup;
+			children = (
+				F25619D317690C5900008E34 /* battle-icon.png */,
+			);
+			name = Accessory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,9 +379,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F25619D517690C9D00008E34 /* battle-icon.png in Resources */,
 				F20688641768EFBD00771F36 /* Main_iPad.storyboard in Resources */,
 				F20688691768EFBD00771F36 /* Images.xcassets in Resources */,
 				F20688611768EFBD00771F36 /* Main_iPhone.storyboard in Resources */,
+				F25619D117690A9600008E34 /* flag_ukraine.png in Resources */,
+				F25619D017690A9600008E34 /* flag_poland.png in Resources */,
 				F20688581768EFBD00771F36 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,8 +404,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F25619B0176900CB00008E34 /* DataPoster.m in Sources */,
+				F25619B1176900CB00008E34 /* ListOfGamesGetter.m in Sources */,
+				F25619BF1769011F00008E34 /* UkraineInfo.m in Sources */,
+				F25619B2176900CB00008E34 /* NewGame.m in Sources */,
+				F25619CB1769012E00008E34 /* RecordPlayer.m in Sources */,
+				F25619BD1769011F00008E34 /* ArmyBuilder.m in Sources */,
+				F25619B3176900CB00008E34 /* UserRegister.m in Sources */,
+				F25619C91769012E00008E34 /* GameDictProcessor.m in Sources */,
+				F25619B4176900CB00008E34 /* ListOfGamesViewController.m in Sources */,
+				F25619A41768FE0F00008E34 /* FirstViewController.m in Sources */,
+				F25619C81769012E00008E34 /* Animator.m in Sources */,
+				F206888A1768F31700771F36 /* HelloScene.m in Sources */,
 				F20688671768EFBD00771F36 /* BNViewController.m in Sources */,
+				F25619BE1769011F00008E34 /* Poland.m in Sources */,
 				F206885E1768EFBD00771F36 /* BNAppDelegate.m in Sources */,
+				F25619CA1769012E00008E34 /* GameLogic.m in Sources */,
 				F206885A1768EFBD00771F36 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -469,6 +633,7 @@
 				F20688811768EFBD00771F36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F20688821768EFBD00771F36 /* Build configuration list for PBXNativeTarget "BattleNationsTests" */ = {
 			isa = XCConfigurationList;
@@ -477,6 +642,7 @@
 				F20688841768EFBD00771F36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

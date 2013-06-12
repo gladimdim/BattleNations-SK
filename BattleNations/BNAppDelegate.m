@@ -13,6 +13,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [[NSUserDefaults standardUserDefaults] setObject:@"https://82.196.1.103" forKey:@"server"];
+    [[NSUserDefaults standardUserDefaults] setObject:@"8444" forKey:@"port"];
+    
     return YES;
 }
 							
