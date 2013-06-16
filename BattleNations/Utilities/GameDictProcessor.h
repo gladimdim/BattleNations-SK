@@ -7,10 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "GameLogic.h"
 @interface GameDictProcessor : NSObject
-
--(GameDictProcessor *) initWithDictOfGame:(NSDictionary *) dictOfGame;
 
 /*-(NSDictionary *) getLeftArmy;
 -(NSDictionary *) getRightArmy;
@@ -23,6 +21,8 @@
 @property (strong) NSArray *arrayRightField;
 @property (strong) NSArray *leftBank;
 @property (strong) NSArray *rightBank;
+
+-(GameDictProcessor *) initWithDictOfGame:(NSDictionary *) dictOfGame gameLogic:(GameLogic *) gameLog;
 
 -(NSArray *) unitPresentAtPosition:(CGPoint ) spritePoint winSize:(CGSize) winSize horizontalStep:(int) hStep verticalStep:(int) vStep currentPlayerID:(NSString *) playerID;
 -(NSString *) leftPlayerID;
@@ -42,4 +42,7 @@
 -(NSString *) oppositePlayerID:(NSString *) currentPlayerID;
 -(UIImage *) imageForLeftPlayersNation;
 -(UIImage *) imageForRightPlayersNation;
+
+
+
 @end

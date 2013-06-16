@@ -7,17 +7,17 @@
 //
 
 #import "GameDictProcessor.h"
-#import "GameLogic.h"
 
 @interface GameDictProcessor()
-//@property NSDictionary *dictOfGame;
+//@property NSDictionary *dictOfGame
+@property GameLogic * gameLogic;
 @end
 
 @implementation GameDictProcessor
 
--(GameDictProcessor *) initWithDictOfGame:(NSDictionary *) dictOfGame {
+-(GameDictProcessor *) initWithDictOfGame:(NSDictionary *) dictOfGame gameLogic:(GameLogic *) gameL {
     GameDictProcessor *game = [[GameDictProcessor alloc] init];
-    
+    game.gameLogic = gameL;
     if (dictOfGame) {
         game.dictOfGame = dictOfGame;
         NSString *leftArmyPlayerID = [game.dictOfGame valueForKey:@"player_left"];
@@ -32,8 +32,9 @@
 
 //checks if touched point contains friendly/enemy unit.
 //Returns array with three objects: first two are game coordinates, the third one is NSNumber with bool value. BOOL represents if friendly unit was selected.
-/*-(NSArray *) unitPresentAtPosition:(CGPoint ) spritePoint winSize:(CGSize) winSize horizontalStep:(int) hStep verticalStep:(int) vStep currentPlayerID:(NSString *) playerID {
-    NSArray *gameCoordinates = [GameLogic cocosToGameCoordinate:spritePoint];
+-(NSArray *) unitPresentAtPosition:(CGPoint ) spritePoint winSize:(CGSize) winSize horizontalStep:(int) hStep verticalStep:(int) vStep currentPlayerID:(NSString *) playerID {
+    
+    NSArray *gameCoordinates = [self.gameLogic kitToGameCoordinate:spritePoint];
     NSUInteger x = [gameCoordinates[0] integerValue]; //floor(spritePoint.x / hStep);
     NSUInteger y = [gameCoordinates[1] integerValue]; //floor(spritePoint.y / vStep) - 1;
     NSLog(@"unitPresentAtPos x: %i, y: %i", x, y);
@@ -66,7 +67,7 @@
         }
     }
     return nil;
-}*/
+}
 
 -(BOOL) isMyTurn:(NSString *) playerID {
     BOOL leftPlayerTurn = [[NSNumber numberWithInt:[[self.dictOfGame valueForKey:@"left_army_turn"] integerValue]] boolValue]; //[[self.gameObj.dictOfGame valueForKey:@"left_army_turn"] isEqualToString:@"true"] ? YES: NO;

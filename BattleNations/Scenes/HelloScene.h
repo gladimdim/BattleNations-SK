@@ -10,4 +10,6 @@
 
 @interface HelloScene : SKScene
 
+-(HelloScene *) initWithSize:(CGSize) size gameObj:(NSDictionary *) gameObject;
+
 @end

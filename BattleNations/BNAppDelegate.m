@@ -15,9 +15,26 @@
     // Override point for customization after application launch.
     [[NSUserDefaults standardUserDefaults] setObject:@"https://82.196.1.103" forKey:@"server"];
     [[NSUserDefaults standardUserDefaults] setObject:@"8444" forKey:@"port"];
-    
+   // [[NSUserDefaults standardUserDefaults] setObject:@"savetko" forKey:@"playerID"];
+   // [[NSUserDefaults standardUserDefaults] setObject:@"sv" forKey:@"email"];
+   
+    /*********Register for APNS**********/
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     return YES;
 }
+
+-(void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSLog(@"My device token: %@", deviceToken);
+    NSString *strDeviceToken =  [[deviceToken description] stringByReplacingOccurrencesOfString:@"<" withString:@""];
+    strDeviceToken = [strDeviceToken stringByReplacingOccurrencesOfString:@">" withString:@""];
+    strDeviceToken = [strDeviceToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [[NSUserDefaults standardUserDefaults] setObject:strDeviceToken forKey:@"deviceToken"];
+}
+
+-(void) application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"APNS could not be registered.");
+}
+
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -45,5 +62,7 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
 
 @end

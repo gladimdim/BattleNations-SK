@@ -9,6 +9,7 @@
 #import "ListOfGamesViewController.h"
 #import "ListOfGamesGetter.h"
 #import "GameDictProcessor.h"
+#import "GameBoardViewController.h"
 
 @interface ListOfGamesViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -45,7 +46,7 @@
 
 -(void) getListOfGames {
     ListOfGamesGetter *getter = [[ListOfGamesGetter alloc] init];
-    [getter getListOfGamesFor:@"gladimdim" withCallBack:^(NSDictionary *dict, NSError *err) {
+    [getter getListOfGamesFor:[[NSUserDefaults standardUserDefaults] stringForKey:@"playerID"] withCallBack:^(NSDictionary *dict, NSError *err) {
         if (err) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:err.localizedDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
@@ -59,13 +60,13 @@
         else {
             NSArray *array = (NSArray *) dict;
             NSLog(@"amount of games: %i", array.count );
-            NSMutableArray *arrayOfGameObj = [NSMutableArray array];
+            NSMutableArray *arrayOfGameDicts = [NSMutableArray array];
             for (int i = 0; i < array.count; i++) {
                 NSDictionary *game = [array[i] objectForKey:@"game"];
-                GameDictProcessor *gameObj = [[GameDictProcessor alloc] initWithDictOfGame:game];
-                [arrayOfGameObj addObject:gameObj];
+                GameDictProcessor *gameObj = [[GameDictProcessor alloc] initWithDictOfGame:game gameLogic:nil];
+                [arrayOfGameDicts addObject:gameObj];
             }
-            self.arrayOfGames = [NSArray arrayWithArray:arrayOfGameObj];
+            self.arrayOfGames = [NSArray arrayWithArray:arrayOfGameDicts];
             [self.tableView reloadData];
         }
     }];
@@ -110,9 +111,16 @@
 #pragma mark - UITableView Delegate methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    [self performSegueWithIdentifier:@"showGameScene" sender:self];
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showGameScene"]) {
+        GameBoardViewController *gc = (GameBoardViewController*) segue.destinationViewController;
+        GameDictProcessor *gd = [self.arrayOfGames objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+        gc.dictOfGame = gd.dictOfGame;
+    }
+}
 
 - (IBAction)btnRefreshPressed:(id)sender {
     [self getListOfGames];

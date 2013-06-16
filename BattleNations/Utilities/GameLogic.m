@@ -7,36 +7,41 @@
 //
 
 #import "GameLogic.h"
-#import "GameDictProcessor.h"
 #import "ArmyBuilder.h"
+#import "GameDictProcessor.h"
+
+@interface GameLogic()
+@property CGSize boardSize;
+@end
 
 @implementation GameLogic
 
-/*+(CGPoint) gameToCocosCoordinate:(NSArray *) position {
-    int x = [position[0] intValue] * [GameLogic horizontalStep];
-    int y = [position[1] intValue] * [GameLogic verticalStep] + [GameLogic verticalStep];
-    x = x + [GameLogic horizontalStep] /2;
-    y = y + [GameLogic verticalStep] / 2;
-    return ccp(x, y);
+-(GameLogic *) initWithBoardSize:(CGSize )boardSize {
+    GameLogic *gameL = [[GameLogic alloc] init];
+    gameL.boardSize = boardSize;
+    gameL.horizontalStep = boardSize.width / 9;
+    gameL.verticalStep = boardSize.height / 6;
+    return gameL;
 }
 
-+(NSArray *) cocosToGameCoordinate:(CGPoint) position {
-    NSUInteger x = floor(position.x / [GameLogic horizontalStep]);
-    NSUInteger y = floor(position.y / [GameLogic verticalStep]) -1;
+-(CGPoint) gameToUIKitCoordinate:(NSArray *) position {
+    int x = [position[0] intValue] * [self horizontalStep];
+    int y = [position[1] intValue] * [self verticalStep] + [self verticalStep] - 1;
+    x = x + [self horizontalStep] /2;
+    y = y + [self verticalStep] / 2;
+    return CGPointMake(x, y);
+}
+
+-(NSArray *) kitToGameCoordinate:(CGPoint)position {
+    NSInteger x = floor(position.x / [self horizontalStep]);
+    NSInteger y = floor((self.boardSize.height - position.y - self.verticalStep) / [self verticalStep]);
+    //we need to correct this as SpriteKit coordinates start from left top
+    //y = 5 - y;
     NSArray *array = [[NSArray alloc] initWithObjects:[NSNumber numberWithInteger:x], [NSNumber numberWithInteger:y], nil];
     return array;
 }
 
-+(int) horizontalStep {
-    CGSize size = [[CCDirector sharedDirector] winSize];
-    return floor(size.width / 9);
-}
-
-+(int) verticalStep {
-    CGSize size = [[CCDirector sharedDirector] winSize];
-    return floor(size.height / 6);
-}
-
+/*
 
 //returns updated gameObj. Moves unit from one pos to another
 +(NSDictionary *) applyMove:(NSArray *) arrayOfActionsInMove toGame:(GameDictProcessor *) gameObj forPlayerID:(NSString *) playerID {

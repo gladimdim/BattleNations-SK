@@ -15,7 +15,7 @@
 		F206885E1768EFBD00771F36 /* BNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F206885D1768EFBD00771F36 /* BNAppDelegate.m */; };
 		F20688611768EFBD00771F36 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F206885F1768EFBD00771F36 /* Main_iPhone.storyboard */; };
 		F20688641768EFBD00771F36 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F20688621768EFBD00771F36 /* Main_iPad.storyboard */; };
-		F20688671768EFBD00771F36 /* BNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20688661768EFBD00771F36 /* BNViewController.m */; };
+		F20688671768EFBD00771F36 /* GameBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20688661768EFBD00771F36 /* GameBoardViewController.m */; };
 		F20688691768EFBD00771F36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F20688681768EFBD00771F36 /* Images.xcassets */; };
 		F20688701768EFBD00771F36 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F206886F1768EFBD00771F36 /* XCTest.framework */; };
 		F20688711768EFBD00771F36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F206884D1768EFBD00771F36 /* Foundation.framework */; };
@@ -24,6 +24,8 @@
 		F206887C1768EFBD00771F36 /* BattleNationsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F206887B1768EFBD00771F36 /* BattleNationsTests.m */; };
 		F20688861768F03000771F36 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F20688851768F03000771F36 /* SpriteKit.framework */; };
 		F206888A1768F31700771F36 /* HelloScene.m in Sources */ = {isa = PBXBuildFile; fileRef = F20688891768F13400771F36 /* HelloScene.m */; };
+		F207FC41176DB7180085F8E5 /* ukraine_units.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F207FC40176DB7180085F8E5 /* ukraine_units.atlas */; };
+		F207FC44176DD00F0085F8E5 /* LoginRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F207FC43176DCF700085F8E5 /* LoginRegisterViewController.m */; };
 		F25619A41768FE0F00008E34 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F206888D1768FD0800771F36 /* FirstViewController.m */; };
 		F25619B0176900CB00008E34 /* DataPoster.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619A9176900B000008E34 /* DataPoster.m */; };
 		F25619B1176900CB00008E34 /* ListOfGamesGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619AB176900B000008E34 /* ListOfGamesGetter.m */; };
@@ -40,6 +42,8 @@
 		F25619D017690A9600008E34 /* flag_poland.png in Resources */ = {isa = PBXBuildFile; fileRef = F25619CE17690A9600008E34 /* flag_poland.png */; };
 		F25619D117690A9600008E34 /* flag_ukraine.png in Resources */ = {isa = PBXBuildFile; fileRef = F25619CF17690A9600008E34 /* flag_ukraine.png */; };
 		F25619D517690C9D00008E34 /* battle-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F25619D317690C5900008E34 /* battle-icon.png */; };
+		F2F3E8C7176CD3A30080042C /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F3E8C6176CD3A30080042C /* GameKit.framework */; };
+		F2F3E990176DACCE0080042C /* poland_units.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F2F3E98F176DACCE0080042C /* poland_units.atlas */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,8 +69,8 @@
 		F206885D1768EFBD00771F36 /* BNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNAppDelegate.m; sourceTree = "<group>"; };
 		F20688601768EFBD00771F36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		F20688631768EFBD00771F36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		F20688651768EFBD00771F36 /* BNViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BNViewController.h; sourceTree = "<group>"; };
-		F20688661768EFBD00771F36 /* BNViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNViewController.m; sourceTree = "<group>"; };
+		F20688651768EFBD00771F36 /* GameBoardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameBoardViewController.h; sourceTree = "<group>"; };
+		F20688661768EFBD00771F36 /* GameBoardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameBoardViewController.m; sourceTree = "<group>"; };
 		F20688681768EFBD00771F36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F206886E1768EFBD00771F36 /* BattleNationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BattleNationsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F206886F1768EFBD00771F36 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -78,6 +82,9 @@
 		F20688891768F13400771F36 /* HelloScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HelloScene.m; path = Scenes/HelloScene.m; sourceTree = "<group>"; };
 		F206888C1768FD0800771F36 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirstViewController.h; path = Views/FirstViewController.h; sourceTree = "<group>"; };
 		F206888D1768FD0800771F36 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FirstViewController.m; path = Views/FirstViewController.m; sourceTree = "<group>"; };
+		F207FC40176DB7180085F8E5 /* ukraine_units.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = ukraine_units.atlas; path = Resources/units/ukraine/ukraine_units.atlas; sourceTree = "<group>"; };
+		F207FC42176DCF700085F8E5 /* LoginRegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LoginRegisterViewController.h; path = Views/LoginRegisterViewController.h; sourceTree = "<group>"; };
+		F207FC43176DCF700085F8E5 /* LoginRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = LoginRegisterViewController.m; path = Views/LoginRegisterViewController.m; sourceTree = "<group>"; };
 		F25619A51769008000008E34 /* ListOfGamesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ListOfGamesViewController.h; path = Views/ListOfGamesViewController.h; sourceTree = "<group>"; };
 		F25619A61769008000008E34 /* ListOfGamesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ListOfGamesViewController.m; path = Views/ListOfGamesViewController.m; sourceTree = "<group>"; };
 		F25619A8176900B000008E34 /* DataPoster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DataPoster.h; path = network/DataPoster.h; sourceTree = "<group>"; };
@@ -105,6 +112,8 @@
 		F25619CE17690A9600008E34 /* flag_poland.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flag_poland.png; path = Resources/flags/flag_poland.png; sourceTree = "<group>"; };
 		F25619CF17690A9600008E34 /* flag_ukraine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flag_ukraine.png; path = Resources/flags/flag_ukraine.png; sourceTree = "<group>"; };
 		F25619D317690C5900008E34 /* battle-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "battle-icon.png"; path = "Resources/Accessory/battle-icon.png"; sourceTree = "<group>"; };
+		F2F3E8C6176CD3A30080042C /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		F2F3E98F176DACCE0080042C /* poland_units.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = poland_units.atlas; path = Resources/units/poland/poland_units.atlas; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2F3E8C7176CD3A30080042C /* GameKit.framework in Frameworks */,
 				F20688861768F03000771F36 /* SpriteKit.framework in Frameworks */,
 				F20688501768EFBD00771F36 /* CoreGraphics.framework in Frameworks */,
 				F20688521768EFBD00771F36 /* UIKit.framework in Frameworks */,
@@ -154,6 +164,7 @@
 		F206884C1768EFBD00771F36 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F2F3E8C6176CD3A30080042C /* GameKit.framework */,
 				F20688851768F03000771F36 /* SpriteKit.framework */,
 				F206884D1768EFBD00771F36 /* Foundation.framework */,
 				F206884F1768EFBD00771F36 /* CoreGraphics.framework */,
@@ -176,8 +187,6 @@
 				F206885D1768EFBD00771F36 /* BNAppDelegate.m */,
 				F206885F1768EFBD00771F36 /* Main_iPhone.storyboard */,
 				F20688621768EFBD00771F36 /* Main_iPad.storyboard */,
-				F20688651768EFBD00771F36 /* BNViewController.h */,
-				F20688661768EFBD00771F36 /* BNViewController.m */,
 				F20688681768EFBD00771F36 /* Images.xcassets */,
 				F20688541768EFBD00771F36 /* Supporting Files */,
 			);
@@ -225,10 +234,14 @@
 		F206888B1768FCF300771F36 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F20688651768EFBD00771F36 /* GameBoardViewController.h */,
+				F20688661768EFBD00771F36 /* GameBoardViewController.m */,
 				F206888C1768FD0800771F36 /* FirstViewController.h */,
 				F206888D1768FD0800771F36 /* FirstViewController.m */,
 				F25619A51769008000008E34 /* ListOfGamesViewController.h */,
 				F25619A61769008000008E34 /* ListOfGamesViewController.m */,
+				F207FC42176DCF700085F8E5 /* LoginRegisterViewController.h */,
+				F207FC43176DCF700085F8E5 /* LoginRegisterViewController.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -279,6 +292,7 @@
 		F25619CC17690A8600008E34 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F2F3E8C9176CDACC0080042C /* units */,
 				F25619D217690C4600008E34 /* Accessory */,
 				F25619CD17690A8C00008E34 /* flags */,
 			);
@@ -300,6 +314,31 @@
 				F25619D317690C5900008E34 /* battle-icon.png */,
 			);
 			name = Accessory;
+			sourceTree = "<group>";
+		};
+		F2F3E8C9176CDACC0080042C /* units */ = {
+			isa = PBXGroup;
+			children = (
+				F2F3E8CB176CDAD40080042C /* poland */,
+				F2F3E8CA176CDAD10080042C /* ukraine */,
+			);
+			name = units;
+			sourceTree = "<group>";
+		};
+		F2F3E8CA176CDAD10080042C /* ukraine */ = {
+			isa = PBXGroup;
+			children = (
+				F207FC40176DB7180085F8E5 /* ukraine_units.atlas */,
+			);
+			name = ukraine;
+			sourceTree = "<group>";
+		};
+		F2F3E8CB176CDAD40080042C /* poland */ = {
+			isa = PBXGroup;
+			children = (
+				F2F3E98F176DACCE0080042C /* poland_units.atlas */,
+			);
+			name = poland;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -350,6 +389,14 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Dmytro Gladkyi";
 				TargetAttributes = {
+					F20688491768EFBD00771F36 = {
+						DevelopmentTeam = 29UL2Y36R9;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
+					};
 					F206886D1768EFBD00771F36 = {
 						TestTargetID = F20688491768EFBD00771F36;
 					};
@@ -379,7 +426,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F207FC41176DB7180085F8E5 /* ukraine_units.atlas in Resources */,
 				F25619D517690C9D00008E34 /* battle-icon.png in Resources */,
+				F2F3E990176DACCE0080042C /* poland_units.atlas in Resources */,
 				F20688641768EFBD00771F36 /* Main_iPad.storyboard in Resources */,
 				F20688691768EFBD00771F36 /* Images.xcassets in Resources */,
 				F20688611768EFBD00771F36 /* Main_iPhone.storyboard in Resources */,
@@ -404,6 +453,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F207FC44176DD00F0085F8E5 /* LoginRegisterViewController.m in Sources */,
 				F25619B0176900CB00008E34 /* DataPoster.m in Sources */,
 				F25619B1176900CB00008E34 /* ListOfGamesGetter.m in Sources */,
 				F25619BF1769011F00008E34 /* UkraineInfo.m in Sources */,
@@ -416,7 +466,7 @@
 				F25619A41768FE0F00008E34 /* FirstViewController.m in Sources */,
 				F25619C81769012E00008E34 /* Animator.m in Sources */,
 				F206888A1768F31700771F36 /* HelloScene.m in Sources */,
-				F20688671768EFBD00771F36 /* BNViewController.m in Sources */,
+				F20688671768EFBD00771F36 /* GameBoardViewController.m in Sources */,
 				F25619BE1769011F00008E34 /* Poland.m in Sources */,
 				F206885E1768EFBD00771F36 /* BNAppDelegate.m in Sources */,
 				F25619CA1769012E00008E34 /* GameLogic.m in Sources */,
@@ -494,7 +544,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dmytro Gladkyi (ZZRDAH7X39)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -532,7 +582,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dmytro Gladkyi (ZZRDAH7X39)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -553,10 +603,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BattleNations/BattleNations-Prefix.pch";
 				INFOPLIST_FILE = "BattleNations/BattleNations-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -566,10 +618,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BattleNations/BattleNations-Prefix.pch";
 				INFOPLIST_FILE = "BattleNations/BattleNations-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
