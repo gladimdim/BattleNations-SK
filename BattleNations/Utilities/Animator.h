@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "GameDictProcessor.h"
+#import <SpriteKit/SpriteKit.h>
 
 @interface Animator : NSObject
-//+(void) animateSpriteSelection:(CCSprite *) sprite;
-//+(void) animateSpriteDeselection:(CCSprite *) sprite;
++(void) animateSpriteSelection:(SKSpriteNode *) sprite;
++(void) animateSpriteDeselection:(SKSpriteNode *) sprite;
 +(NSArray *) createHealthBarsForFieldInGame:(GameDictProcessor *) gameObj;
 @end

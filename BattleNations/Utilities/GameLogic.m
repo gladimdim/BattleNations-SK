@@ -41,10 +41,10 @@
     return array;
 }
 
-/*
+
 
 //returns updated gameObj. Moves unit from one pos to another
-+(NSDictionary *) applyMove:(NSArray *) arrayOfActionsInMove toGame:(GameDictProcessor *) gameObj forPlayerID:(NSString *) playerID {
+-(NSDictionary *) applyMove:(NSArray *) arrayOfActionsInMove toGame:(GameDictProcessor *) gameObj forPlayerID:(NSString *) playerID {
     NSMutableDictionary *dictGame = [NSMutableDictionary dictionaryWithDictionary:gameObj.dictOfGame];
     NSMutableArray *field = [NSMutableArray arrayWithArray:[gameObj getFieldForPlayerID:playerID]];
     NSArray *initPosition = arrayOfActionsInMove[0];
@@ -69,7 +69,7 @@
     
 }
 
-+(BOOL) canMoveFrom:(NSArray *) initPosition to:(NSArray *) destPosition forPlayerID:(NSString *) playerID inGame:(GameDictProcessor *) gameObj {
+-(BOOL) canMoveFrom:(NSArray *) initPosition to:(NSArray *) destPosition forPlayerID:(NSString *) playerID inGame:(GameDictProcessor *) gameObj {
     NSDictionary *dictArmy = (NSDictionary *) [gameObj.dictOfGame objectForKey:playerID];
     if (dictArmy) {
         NSArray *field = (NSArray *) [dictArmy objectForKey:@"field"];
@@ -90,7 +90,7 @@
     return NO;
 }
 
-+(BOOL) canAttackFrom:(NSArray *) initPosition to:(NSArray *) destPosition forPlayerID:(NSString *) playerID inGame:(GameDictProcessor *) gameObj {
+-(BOOL) canAttackFrom:(NSArray *) initPosition to:(NSArray *) destPosition forPlayerID:(NSString *) playerID inGame:(GameDictProcessor *) gameObj {
     NSDictionary *dictArmy = (NSDictionary *) [gameObj.dictOfGame objectForKey:playerID];
     if (dictArmy) {
         NSArray *field = (NSArray *) [dictArmy objectForKey:@"field"];
@@ -118,7 +118,7 @@
     return NO;
 }
 
-+(NSDictionary *) placeNewUnit:(NSString *) unitName forGame:(GameDictProcessor *) gameObj forPlayerID:(NSString *) playerID atPosition:(NSArray *) coords {
+-(NSDictionary *) placeNewUnit:(NSString *) unitName forGame:(GameDictProcessor *) gameObj forPlayerID:(NSString *) playerID atPosition:(NSArray *) coords {
     NSMutableDictionary *dictBank = [NSMutableDictionary dictionaryWithDictionary:[gameObj getBankForPlayerID:playerID]];
     NSNumber *amountOfUnits = [dictBank objectForKey:unitName];
     amountOfUnits = [NSNumber numberWithInt:[amountOfUnits intValue] - 1];
@@ -145,7 +145,7 @@
     return dictOfGame;
 }
 
-+(NSSet *) getCoordinatesForNewUnitForGame:(GameDictProcessor *) gameObj forPlayerID:(NSString *) playerID {
+-(NSSet *) getCoordinatesForNewUnitForGame:(GameDictProcessor *) gameObj forPlayerID:(NSString *) playerID {
     NSDictionary *dictOfGame = gameObj.dictOfGame;
     NSString *leftPlayer = [dictOfGame valueForKey:@"player_left"];
     if ([playerID isEqualToString:leftPlayer]) {
@@ -156,7 +156,7 @@
     }
 }
 
-+(NSDictionary *) attackUnitFrom:(NSArray *) attackerCoords fromPlayerID:(NSString *) playerID toUnit:(NSArray *) targetCoords forGame:(GameDictProcessor *) gameObj {
+-(NSDictionary *) attackUnitFrom:(NSArray *) attackerCoords fromPlayerID:(NSString *) playerID toUnit:(NSArray *) targetCoords forGame:(GameDictProcessor *) gameObj {
     NSDictionary *dictOfAttacker = [NSDictionary dictionaryWithDictionary:[gameObj.dictOfGame objectForKey:playerID]];
     if (dictOfAttacker) {
         NSArray *field = (NSArray *) [dictOfAttacker objectForKey:@"field"];
@@ -215,7 +215,7 @@
                             [dictOfGame setObject:dictPlayer forKey:targetPlayerID];
                             return dictOfGame;
                         }
-////comment this block
+/*
                         //pack new unit into field
                         [fieldArray addObject:dictNewUnit];
                         //pack new field into player's dict
@@ -223,7 +223,7 @@
                         //pack new player dict into final dict
                         [dictOfGame setObject:dictPlayer forKey:targetPlayerID];
                         NSLog(@"placing new unit");
- ////////comment this block
+*/
 
                     }
                 }
@@ -236,7 +236,7 @@
     return nil;
 }
 
-+(NSDictionary *) healUnitFrom:(NSArray *) healerCoords fromPlayerID:(NSString *) playerID toUnit:(NSArray *) targetCoords forGame:(GameDictProcessor *) gameObj {
+-(NSDictionary *) healUnitFrom:(NSArray *) healerCoords fromPlayerID:(NSString *) playerID toUnit:(NSArray *) targetCoords forGame:(GameDictProcessor *) gameObj {
     NSDictionary *dictOfHealer = [NSDictionary dictionaryWithDictionary:[gameObj.dictOfGame objectForKey:playerID]];
     if (dictOfHealer) {
         NSArray *field = (NSArray *) [dictOfHealer objectForKey:@"field"];
@@ -275,7 +275,7 @@
 
 //returns true if healer is present at specified coordinates for specified playerID
 //in future can be abstracted to check for any unit name.
-+(BOOL) healerPresentAt:(NSArray *) position forGame:(GameDictProcessor *) gameObj forPlayerID:(NSString *)playerId {
+-(BOOL) healerPresentAt:(NSArray *) position forGame:(GameDictProcessor *) gameObj forPlayerID:(NSString *)playerId {
     NSArray *field = [gameObj getFieldForPlayerID:playerId];
     for (int i = 0; i < field.count; i++) {
         NSDictionary *topUnit = (NSDictionary *) field[i];
@@ -289,6 +289,6 @@
         }
     }
     return false;
-}*/
+}
 
 @end

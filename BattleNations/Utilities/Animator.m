@@ -10,21 +10,16 @@
 #import "GameLogic.h"
 
 @implementation Animator
-/*+(void) animateSpriteSelection:(CCSprite *)sprite {
-    //fabsf is needed as our scale may have negative values (when sprite is flipped).
-    NSLog(@"increase fabs: %f", sprite.scaleX);
-    if (sprite && fabsf(sprite.scaleX) <= 1.0) {
-        [sprite runAction:[CCScaleBy actionWithDuration:0.3f scale:1.3f]];
-    }
++(void) animateSpriteSelection:(SKSpriteNode *)sprite {
+    SKAction *action = [SKAction colorizeWithColor:[UIColor greenColor] colorBlendFactor:0.8f duration:0.5];
+    [sprite runAction:action];
 }
 
-+(void) animateSpriteDeselection:(CCSprite *)sprite {
-    NSLog(@"increase fabs: %f", sprite.scaleX);
-    if (sprite && fabsf(sprite.scaleX) > 1.0) {
-        [sprite runAction:[CCScaleBy actionWithDuration:0.3f scale:0.76f]];
-    }
++(void) animateSpriteDeselection:(SKSpriteNode *)sprite {
+    [sprite setColorBlendFactor:0.0f];
 }
 
+/*
 +(NSArray *) createHealthBarsForFieldInGame:(GameDictProcessor *) gameObj {
     NSArray *arrayOfAllFields = [gameObj.arrayLeftField arrayByAddingObjectsFromArray:gameObj.arrayRightField];
     NSMutableArray *arrayOfHealthSprites = [[NSMutableArray alloc] initWithCapacity:arrayOfAllFields.count];
