@@ -26,7 +26,7 @@
 
 -(CGPoint) gameToUIKitCoordinate:(NSArray *) position {
     int x = [position[0] intValue] * [self horizontalStep];
-    int y = [position[1] intValue] * [self verticalStep] + [self verticalStep] - 1;
+    int y = [position[1] intValue] * [self verticalStep] + [self verticalStep];
     x = x + [self horizontalStep] /2;
     y = y + [self verticalStep] / 2;
     return CGPointMake(x, y);
@@ -34,7 +34,7 @@
 
 -(NSArray *) kitToGameCoordinate:(CGPoint)position {
     NSInteger x = floor(position.x / [self horizontalStep]);
-    NSInteger y = floor((self.boardSize.height - position.y - self.verticalStep) / [self verticalStep]);
+    NSInteger y = floor(position.y / [self verticalStep]) - 1;
     //we need to correct this as SpriteKit coordinates start from left top
     //y = 5 - y;
     NSArray *array = [[NSArray alloc] initWithObjects:[NSNumber numberWithInteger:x], [NSNumber numberWithInteger:y], nil];

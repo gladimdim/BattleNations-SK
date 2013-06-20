@@ -40,26 +40,25 @@
         self.arrayOfMoves = [NSMutableArray array];
         self.arrayOfStates = [NSMutableArray array];
         [self.arrayOfStates addObject:self.gameObj.dictOfGame];
-        NSData * data = [NSPropertyListSerialization dataFromPropertyList:self.gameObj.dictOfGame
-                                                                   format:NSPropertyListBinaryFormat_v1_0 errorDescription:NULL];
-        NSLog(@"size: %d", [data length]);
         self.unitsAtlasUkraine = [SKTextureAtlas atlasNamed:@"ukraine_units"];
         self.unitsAtlasPoland = [SKTextureAtlas atlasNamed:@"poland_units"];
-        self.gameLogic = [[GameLogic alloc] initWithBoardSize:self.size];
+        self.gameLogic = [[GameLogic alloc] initWithBoardSize:size];
+        
+        [self setAnchorPoint:CGPointMake(0, 0)];
     }
     return self;
 }
 
 -(void) didMoveToView:(SKView *)view {
     if (!self.contentCreated) {
-        [self createScreenContents];
+        //[self createScreenContents];
         self.contentCreated = YES;
     }
     [self initObject];
 }
 
 -(void) initObject {
-    CGSize size = self.frame.size;
+    CGSize size = self.size;
     self.horizontalStep = floor(size.width / 9);
     self.verticalStep = floor(size.height / 6);
     NSLog(@"horizontal step: %i, vertical: %i", self.horizontalStep, self.verticalStep);
@@ -143,12 +142,99 @@
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //NSLog(@"%@", touches);
-    for (UITouch *touch in touches) {
-        CGPoint touchPoint = [touch locationInView:self.view];
-        NSLog(@"location: %@", NSStringFromCGPoint(touchPoint));
-        NSArray *array = [self.gameObj unitPresentAtPosition:touchPoint winSize:self.view.frame.size horizontalStep:self.gameLogic.horizontalStep verticalStep:self.gameLogic.verticalStep currentPlayerID:self.currentPlayerID];
-        NSLog(@"array: %@", array);
-    }
+    UITouch *touch = [[event allTouches] anyObject];
+    //we need to have two points: node is used then in selectSpriteSqureAt to get selected node as CGRectContainsPoint does not work.
+    //It is strange but SKView and Scene have different anchorPoints and they must be handled differently. 
+    //CGPoint touchPointInNode = [touch locationInNode:self];//[touch locationInView:self.view];
+    CGPoint touchPointInView = [touch locationInNode:self];
+    NSArray *array = [self.gameObj unitPresentAtPosition:touchPointInView winSize:self.size horizontalStep:self.gameLogic.horizontalStep verticalStep:self.gameLogic.verticalStep currentPlayerID:self.currentPlayerID];
+    NSLog(@"array: %@", array);
+       
+    [self selectSpriteSquareAt:touchPointInView];
+
 }
+
+-(void) selectSpriteSquareAt:(CGPoint) touchPoint {
+    NSLog(@"Entered select spriteSquare At point: %@", NSStringFromCGPoint(touchPoint));
+    
+    //find what sprite was touched
+    SKSpriteNode *sprite = (SKSpriteNode *) [[self nodesAtPoint:touchPoint] firstObject];
+    if (sprite) {
+        self.selectedSprite = sprite;
+    }
+    
+    for (SKSpriteNode *node in [self children]) {
+        CGRect rectToCheck = [self.view.superview convertRect:node.frame toView:self.view];
+        if (CGRectContainsPoint(rectToCheck, touchPoint)) {
+            NSLog(@"yo");
+        }
+    }
+    
+    //handle selection in bank
+    if (touchPoint.y  < self.verticalStep) {
+        NSLog(@"Handling selection in bank section");
+        NSArray *pos = [self.gameLogic kitToGameCoordinate:touchPoint];
+        int x = [pos[0] intValue];
+        switch (x) {
+            case 0:
+                self.unitNameSelectedInBank = @"infantry";
+                self.bankSelected = YES;
+                break;
+            case 1:
+                self.unitNameSelectedInBank = @"light_cavalry";
+                self.bankSelected = YES;
+                break;
+            case 2:
+                self.unitNameSelectedInBank = @"heavy_cavalry";
+                self.bankSelected = YES;
+                break;
+            case 3:
+                self.unitNameSelectedInBank = @"veteran";
+                self.bankSelected = YES;
+                break;
+            case 4:
+                self.unitNameSelectedInBank = @"healer";
+                self.bankSelected = YES;
+                break;
+            case 5:
+                self.unitNameSelectedInBank = @"super_unit";
+                self.bankSelected = YES;
+                break;
+            default:
+                break;
+        }
+        self.unitWasSelectedPosition = nil;
+        NSLog(@"Bank selection: %@", self.unitNameSelectedInBank);
+      ////  [Animator animateSpriteSelection:self.selectedSprite];
+        return;
+    }
+    /*
+    
+    NSArray *positionOfSelectedUnit = [self.gameObj unitPresentAtPosition:touchPoint winSize:[[CCDirector sharedDirector] winSize] horizontalStep:self.horizontalStep verticalStep:self.verticalStep currentPlayerID:self.currentPlayerID];
+    //deselect if selected the same unit. Then return.
+    if (positionOfSelectedUnit) {
+        if ([self.unitWasSelectedPosition[0] integerValue] == [positionOfSelectedUnit[0] integerValue] && [self.unitWasSelectedPosition[1] integerValue] == [positionOfSelectedUnit[1] integerValue]) {
+            self.unitWasSelectedPosition = nil;
+            [Animator animateSpriteDeselection:self.selectedSprite];
+            return;
+        }
+    }
+    //if there are 6 states (5 + 1 because the initial position counts as state) already - return
+    if (self.arrayOfStates.count >= 6) {
+        NSLog(@"Movement denied: There are already 5 moves");
+        return;
+    }
+    //if it is not our turn - return
+    if (![self.gameObj isMyTurn:self.currentPlayerID]) {
+        NSLog(@"Movement denied: it is not your turn");
+        return;
+    }
+    
+    [self makeMoveFromPosition:self.unitWasSelectedPosition touchedPoint:touchPoint forPlayerID:self.currentPlayerID];
+    */
+}
+
+
+
 
 @end
