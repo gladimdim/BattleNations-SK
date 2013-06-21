@@ -93,9 +93,18 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="oth-6L-KpU"/>
+                    <navigationItem key="navigationItem" id="oth-6L-KpU">
+                        <barButtonItem key="rightBarButtonItem" title="Undo" id="UBD-tS-m6G">
+                            <connections>
+                                <action selector="undoButtonPressed:" destination="i5o-cX-0ob" id="Ort-Pq-baR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="btnUndo" destination="UBD-tS-m6G" id="u5U-o3-f39"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b4a-9f-Nqq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

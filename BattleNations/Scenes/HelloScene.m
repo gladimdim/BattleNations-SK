@@ -16,7 +16,6 @@
 @property int horizontalStep;
 @property int verticalStep;
 @property (strong) GameDictProcessor *gameObj;
-@property CGPoint lastTouchedPoint;
 @property BOOL moving;
 @property (strong) NSArray *unitWasSelectedPosition;
 @property NSMutableArray *arrayOfMoves;
@@ -30,6 +29,7 @@
 @property SKTextureAtlas *unitsAtlasUkraine;
 @property SKTextureAtlas *unitsAtlasPoland;
 @property GameLogic *gameLogic;
+
 @end
 
 @implementation HelloScene
@@ -116,7 +116,7 @@
         position = [NSArray arrayWithObjects:@(0), @(2), nil];
     }
     SKTextureAtlas *atlasToUse = [nationName isEqualToString:@"ukraine"] ? self.unitsAtlasUkraine : self.unitsAtlasPoland;
-    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:[atlasToUse textureNamed:[NSString stringWithFormat:@"%@_%@.png", [self.gameObj nationForPlayerID:self.currentPlayerID], unitName]]];
+    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:[atlasToUse textureNamed:[NSString stringWithFormat:@"%@_%@.png", nationName, unitName]]];
 
     //SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"%@_%@.png", nationName, unitName]];
     if (!leftArmy) {
@@ -155,8 +155,8 @@
     //find what sprite was touched
     SKSpriteNode *sprite = (SKSpriteNode *) [[self nodesAtPoint:touchPoint] firstObject];
     if (sprite) {
+        [Animator animateSpriteDeselection:self.selectedSprite];
         self.selectedSprite = sprite;
-        [Animator animateSpriteSelection:self.selectedSprite];
     }
    
     
@@ -247,6 +247,7 @@
                     self.gameObj = newGameObj;
                     [self.arrayOfStates addObject:self.gameObj.dictOfGame];
                     [self removeAllChildren];
+                    self.callBackBlockTurnMade(self.arrayOfMoves.count);
                     [self initObject];
                     self.unitNameSelectedInBank = nil;
                     self.unitWasSelectedPosition = nil;
@@ -269,6 +270,7 @@
                     self.gameObj = newGameObj;
                     [self.arrayOfStates addObject:self.gameObj.dictOfGame];
                     [self removeAllChildren];
+                    self.callBackBlockTurnMade(self.arrayOfMoves.count);
                     [self initObject];
                     self.unitNameSelectedInBank = nil;
                     self.unitWasSelectedPosition = nil;
@@ -295,26 +297,21 @@
                 NSLog(@"found sprite");
                 if ([self.gameLogic canMoveFrom:initPosition to:newGameCoordinates forPlayerID:playerID inGame:self.gameObj]) {
                     //run animation of sprite's move. When animation is done - do necessary tasks to update gameObj with new coordinates.
-                   /* CCMoveTo *actionMove = [CCMoveTo actionWithDuration:0.5f position:[GameLogic gameToCocosCoordinate:newGameCoordinates]];
-                    CCCallBlock *actionMoveDone = [CCCallBlock actionWithBlock:^(CCNode *node) {
-                        //update gameObj dictionary with new position of unit
-                        //add gameObj to arrayOfMoves
-                        //this array contains initial position of unit and its target action;
-                        //we need to add only coordinates to array of moves.
-                        NSLog(@"Running animation for moving sprite");
-                        NSArray *arrayWithoutBool = @[initPosition[0], initPosition[1]]; //@[self.unitWasSelectedPosition[0], self.unitWasSelectedPosition[1]];
-                        NSArray *arrayOfPositionsInMove = @[arrayWithoutBool, newGameCoordinates];
-                        NSDictionary *newDictOfGame = [self.gameLogic applyMove:arrayOfPositionsInMove toGame:self.gameObj forPlayerID:playerID];
-                        self.gameObj = [[GameDictProcessor alloc] initWithDictOfGame:newDictOfGame];
-                        [self.arrayOfMoves addObject:arrayOfPositionsInMove];
-                        [self.arrayOfStates addObject:self.gameObj.dictOfGame];
-                        [self removeAllChildren];
-                        [self initObject];
-                        self.unitWasSelectedPosition = nil;
-                    }];
-                    [self.selectedSprite runAction:[CCSequence actions:actionMove, actionMoveDone, nil]];
-                    */
-                    
+                    //update gameObj dictionary with new position of unit
+                    //add gameObj to arrayOfMoves
+                    //this array contains initial position of unit and its target action;
+                    //we need to add only coordinates to array of moves.
+                    NSLog(@"Running animation for moving sprite");
+                    NSArray *arrayWithoutBool = @[initPosition[0], initPosition[1]]; //@[self.unitWasSelectedPosition[0], self.unitWasSelectedPosition[1]];
+                    NSArray *arrayOfPositionsInMove = @[arrayWithoutBool, newGameCoordinates];
+                    NSDictionary *newDictOfGame = [self.gameLogic applyMove:arrayOfPositionsInMove toGame:self.gameObj forPlayerID:playerID];
+                    self.gameObj = [[GameDictProcessor alloc] initWithDictOfGame:newDictOfGame gameLogic:self.gameLogic];
+                    [self.arrayOfMoves addObject:arrayOfPositionsInMove];
+                    [self.arrayOfStates addObject:self.gameObj.dictOfGame];
+                    [self removeAllChildren];
+                    self.callBackBlockTurnMade(self.arrayOfMoves.count);
+                    [self initObject];
+                    self.unitWasSelectedPosition = nil;
                     return;
                 }
                 else {
@@ -334,7 +331,7 @@
         BOOL friendlyUnit = [nFriendlyUnit boolValue];
         if (friendlyUnit) {
             self.unitWasSelectedPosition = targetPosition;
-           // [Animator animateSpriteSelection:self.selectedSprite];
+            [Animator animateSpriteSelection:self.selectedSprite];
            /* NSArray *arr = [Animator createHealthBarsForFieldInGame:self.gameObj];
             for (int i = 0; i < arr.count; i++) {
                 [self addChild:arr[i]];
@@ -434,6 +431,7 @@
             self.unitNameSelectedInBank = nil;
             [self.arrayOfStates addObject:self.gameObj.dictOfGame];
             [self removeAllChildren];
+            self.callBackBlockTurnMade(self.arrayOfMoves.count);
             [self initObject];
         }
         else {
@@ -447,6 +445,21 @@
         self.unitWasSelectedPosition = NO;
     }
     
+}
+
+-(NSInteger) undoTurnAndReturnWhichTurn {
+    if (self.arrayOfMoves.count == 0) {
+        return 0;
+    }
+    else {
+        [self.arrayOfMoves removeLastObject];
+        [self.arrayOfStates removeLastObject];
+        self.gameObj = [[GameDictProcessor alloc] initWithDictOfGame:[self.arrayOfStates lastObject] gameLogic:self.gameLogic];
+        [self removeAllChildren];
+        self.callBackBlockTurnMade(self.arrayOfMoves.count);
+        [self initObject];
+        return self.arrayOfMoves.count;
+    }
 }
 
 

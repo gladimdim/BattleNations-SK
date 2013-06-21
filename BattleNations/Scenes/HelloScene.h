@@ -11,5 +11,7 @@
 @interface HelloScene : SKScene
 
 -(HelloScene *) initWithSize:(CGSize) size gameObj:(NSDictionary *) gameObject;
-
+-(NSInteger) undoTurnAndReturnWhichTurn;
+-(NSInteger) madeTurnNumber;
+@property (copy, nonatomic) void (^callBackBlockTurnMade) (NSInteger);
 @end
