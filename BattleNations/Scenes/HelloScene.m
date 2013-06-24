@@ -121,7 +121,8 @@
     //SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"%@_%@.png", nationName, unitName]];
     if (!leftArmy) {
         //[sprite setScaleX:-1.0];
-        [sprite setZRotation:180];
+//        [sprite setZRotation:240];
+        [sprite setXScale:-1.0f];
     }
     CGPoint newPoint = [self.gameLogic gameToUIKitCoordinate:position];
   //  NSLog(@"placing sprite at %@ [%@]", NSStringFromCGPoint(newPoint), position);
