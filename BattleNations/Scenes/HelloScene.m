@@ -10,6 +10,7 @@
 #import "GameLogic.h"
 #import "GameDictProcessor.h"
 #import "Animator.h"
+#import "DataPoster.h"
 
 @interface HelloScene()
 @property BOOL contentCreated;
@@ -120,12 +121,9 @@
 
     //SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"%@_%@.png", nationName, unitName]];
     if (!leftArmy) {
-        //[sprite setScaleX:-1.0];
-//        [sprite setZRotation:240];
         [sprite setXScale:-1.0f];
     }
     CGPoint newPoint = [self.gameLogic gameToUIKitCoordinate:position];
-  //  NSLog(@"placing sprite at %@ [%@]", NSStringFromCGPoint(newPoint), position);
     sprite.position = newPoint;
     [self addChild:sprite];
 }
@@ -147,7 +145,6 @@
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint touchPointInView = [touch locationInNode:self];
     [self selectSpriteSquareAt:touchPointInView];
-
 }
 
 -(void) selectSpriteSquareAt:(CGPoint) touchPoint {
@@ -159,8 +156,6 @@
         [Animator animateSpriteDeselection:self.selectedSprite];
         self.selectedSprite = sprite;
     }
-   
-    
     //handle selection in bank
     if (touchPoint.y  < self.verticalStep) {
         NSLog(@"Handling selection in bank section");
@@ -333,10 +328,10 @@
         if (friendlyUnit) {
             self.unitWasSelectedPosition = targetPosition;
             [Animator animateSpriteSelection:self.selectedSprite];
-           /* NSArray *arr = [Animator createHealthBarsForFieldInGame:self.gameObj];
+            NSArray *arr = [Animator createHealthBarsForFieldInGame:self.gameObj gameLogic:self.gameLogic];
             for (int i = 0; i < arr.count; i++) {
                 [self addChild:arr[i]];
-            }*/
+            }
         }
     }
     //placing new unit on board
@@ -354,15 +349,15 @@
     [self removeAllChildren];
     [self initObject];
     
-   ///// [self makeMoveFromReplay:self.gameObj arrayOfMoves:[NSMutableArray arrayWithArray:arrayLastMoves]];
+    [self makeMoveFromReplay:self.gameObj arrayOfMoves:[NSMutableArray arrayWithArray:arrayLastMoves]];
     
 }
-/*
+
 -(void) makeMoveFromReplay:(GameDictProcessor *) gameObject arrayOfMoves:(NSMutableArray *) arrayLastMoves {
     if (arrayLastMoves.count == 0) {
         self.unitNameSelectedInBank = nil;
         self.unitWasSelectedPosition = nil;
-        self.bankSelected = nil;
+        self.bankSelected = NO;
         self.arrayOfMoves = [[NSMutableArray alloc] init];
         self.arrayOfStates = [[NSMutableArray alloc] init];
         [self.arrayOfStates addObject:self.downloadedGameObj.dictOfGame];
@@ -381,8 +376,8 @@
             //THIS IS VERY IMPORTANT as without self.selectedSprite being correctly initialized animation does not work and CCCallBlocks are send to wrong instance (they are not
             //called at all).
             for (int i = 0; i < [self children].count; i++) {
-                CCSprite *sprite = (CCSprite *) [[self children] objectAtIndex:i];
-                if (CGRectContainsPoint([sprite boundingBox], [GameLogic gameToCocosCoordinate:move[0]])) {
+                SKSpriteNode *sprite = (SKSpriteNode *) [[self children] objectAtIndex:i];
+                if (CGRectContainsPoint([sprite frame], [self.gameLogic gameToUIKitCoordinate:move[0]])) {
                     [Animator animateSpriteDeselection:self.selectedSprite];
                     self.selectedSprite = sprite;
                 }
@@ -393,7 +388,7 @@
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_current_queue(), ^(void){
                 NSLog(@"Making move: %@", move);
-                [self makeMoveFromPosition:move[0] touchedPoint:[GameLogic gameToCocosCoordinate:move[1]] forPlayerID:[gameObject oppositePlayerID:self.currentPlayerID]];
+                [self makeMoveFromPosition:move[0] touchedPoint:[self.gameLogic gameToUIKitCoordinate:move[1]] forPlayerID:[gameObject oppositePlayerID:self.currentPlayerID]];
                 [arrayLastMoves removeObjectAtIndex:0];
                 [self makeMoveFromReplay:self.gameObj arrayOfMoves:arrayLastMoves];
             });
@@ -410,7 +405,7 @@
             });
         }
     }
-}*/
+}
 
 //places new unit on board from bank and creates new GameDictProcessor which is assigned to self
 -(void) placeNewUnitOnBoardForGame:(GameDictProcessor *) gameObjLocal unitName:(NSString *) unitName proposedPosition:(NSArray *) proposedPositionFromCGPoint forPlayerID:(NSString *) playerID{
@@ -461,6 +456,20 @@
         [self initObject];
         return self.arrayOfMoves.count;
     }
+}
+
+-(void) sendGameToServer {
+    if ([self.gameObj isMyTurn:self.currentPlayerID]) {
+        DataPoster *poster = [[DataPoster alloc] init];
+        [self.gameObj changeTurnToOtherPlayer];
+        [poster sendMoves:self.arrayOfMoves forGame:self.gameObj withCallBack:^(BOOL success) {
+            NSLog(@"Sent moves: %@", success ? @"YES" : @"NO");
+        }];
+    }
+    else {
+        NSLog(@"Sending denied: it is not your turn");
+    }
+
 }
 
 

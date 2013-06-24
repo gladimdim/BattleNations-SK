@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 #import "GameDictProcessor.h"
 @interface DataPoster : NSObject <NSURLConnectionDelegate>
-///-(void) sendMoves:(NSArray *) arrayOfMoves forGame:(GameDictProcessor*) gameObj withCallBack:(void (^) (BOOL)) callBackBlock;
+-(void) sendMoves:(NSArray *) arrayOfMoves forGame:(GameDictProcessor*) gameObj withCallBack:(void (^) (BOOL)) callBackBlock;
 @end

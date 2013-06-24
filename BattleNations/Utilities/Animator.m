@@ -19,21 +19,20 @@
     [sprite setColorBlendFactor:0.0f];
 }
 
-/*
-+(NSArray *) createHealthBarsForFieldInGame:(GameDictProcessor *) gameObj {
+
++(NSArray *) createHealthBarsForFieldInGame:(GameDictProcessor *) gameObj gameLogic:(GameLogic *)gameLogic {
     NSArray *arrayOfAllFields = [gameObj.arrayLeftField arrayByAddingObjectsFromArray:gameObj.arrayRightField];
     NSMutableArray *arrayOfHealthSprites = [[NSMutableArray alloc] initWithCapacity:arrayOfAllFields.count];
     for (int i = 0; i < arrayOfAllFields.count; i++) {
-        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Health-Bar.plist"];
         NSInteger health =  [gameObj getHealthLevelForUnit:arrayOfAllFields[i]];
-        CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:health > 50 ? @"health-bar-100.png" : @"health-bar-20.png"];
+        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:health > 50 ? @"health-bar-100.png" : @"health-bar-20.png"];
         NSArray *coords = [gameObj getCoordsForUnit:arrayOfAllFields[i]];
-        CGPoint centerPosition = [GameLogic gameToCocosCoordinate:coords];
-        centerPosition.y = centerPosition.y + [GameLogic verticalStep] / 2;
+        CGPoint centerPosition = [gameLogic gameToUIKitCoordinate:coords];
+        centerPosition.y = centerPosition.y + [gameLogic verticalStep] / 2;
         sprite.position = centerPosition;
         [arrayOfHealthSprites addObject:sprite];
     }
     return arrayOfHealthSprites;
-}*/
+}
 
 @end

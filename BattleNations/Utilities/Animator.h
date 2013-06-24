@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "GameDictProcessor.h"
 #import <SpriteKit/SpriteKit.h>
+#import "GameLogic.h"
 
 @interface Animator : NSObject
 +(void) animateSpriteSelection:(SKSpriteNode *) sprite;
 +(void) animateSpriteDeselection:(SKSpriteNode *) sprite;
-+(NSArray *) createHealthBarsForFieldInGame:(GameDictProcessor *) gameObj;
++(NSArray *) createHealthBarsForFieldInGame:(GameDictProcessor *) gameObj gameLogic:(GameLogic *) gameLogic;
 @end

@@ -14,7 +14,7 @@
 @end
 
 @implementation DataPoster
-/*
+
 -(void) sendMoves:(NSArray *) arrayOfMoves forGame:(GameDictProcessor*) gameObj withCallBack:(void (^)(BOOL))callBackBlock {
     self.callBackBlock = callBackBlock;
     NSString *server = [[NSUserDefaults standardUserDefaults] stringForKey:@"server"];
@@ -77,5 +77,5 @@
 -(void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     NSLog(@"Error during getting list of games: %@", [error localizedDescription]);
     self.callBackBlock(nil);
-}*/
+}
 @end

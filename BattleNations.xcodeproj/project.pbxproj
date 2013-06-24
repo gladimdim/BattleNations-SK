@@ -26,6 +26,7 @@
 		F206888A1768F31700771F36 /* HelloScene.m in Sources */ = {isa = PBXBuildFile; fileRef = F20688891768F13400771F36 /* HelloScene.m */; };
 		F207FC41176DB7180085F8E5 /* ukraine_units.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F207FC40176DB7180085F8E5 /* ukraine_units.atlas */; };
 		F207FC44176DD00F0085F8E5 /* LoginRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F207FC43176DCF700085F8E5 /* LoginRegisterViewController.m */; };
+		F21A33E317789D1E000DAC84 /* HealthBar.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F21A33E217789D1E000DAC84 /* HealthBar.atlas */; };
 		F25619A41768FE0F00008E34 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F206888D1768FD0800771F36 /* FirstViewController.m */; };
 		F25619B0176900CB00008E34 /* DataPoster.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619A9176900B000008E34 /* DataPoster.m */; };
 		F25619B1176900CB00008E34 /* ListOfGamesGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619AB176900B000008E34 /* ListOfGamesGetter.m */; };
@@ -85,6 +86,7 @@
 		F207FC40176DB7180085F8E5 /* ukraine_units.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = ukraine_units.atlas; path = Resources/units/ukraine/ukraine_units.atlas; sourceTree = "<group>"; };
 		F207FC42176DCF700085F8E5 /* LoginRegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LoginRegisterViewController.h; path = Views/LoginRegisterViewController.h; sourceTree = "<group>"; };
 		F207FC43176DCF700085F8E5 /* LoginRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = LoginRegisterViewController.m; path = Views/LoginRegisterViewController.m; sourceTree = "<group>"; };
+		F21A33E217789D1E000DAC84 /* HealthBar.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = HealthBar.atlas; path = Resources/HealthBar.atlas; sourceTree = "<group>"; };
 		F25619A51769008000008E34 /* ListOfGamesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ListOfGamesViewController.h; path = Views/ListOfGamesViewController.h; sourceTree = "<group>"; };
 		F25619A61769008000008E34 /* ListOfGamesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ListOfGamesViewController.m; path = Views/ListOfGamesViewController.m; sourceTree = "<group>"; };
 		F25619A8176900B000008E34 /* DataPoster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DataPoster.h; path = network/DataPoster.h; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 		F25619CC17690A8600008E34 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F21A33E217789D1E000DAC84 /* HealthBar.atlas */,
 				F2F3E8C9176CDACC0080042C /* units */,
 				F25619D217690C4600008E34 /* Accessory */,
 				F25619CD17690A8C00008E34 /* flags */,
@@ -433,6 +436,7 @@
 				F20688691768EFBD00771F36 /* Images.xcassets in Resources */,
 				F20688611768EFBD00771F36 /* Main_iPhone.storyboard in Resources */,
 				F25619D117690A9600008E34 /* flag_ukraine.png in Resources */,
+				F21A33E317789D1E000DAC84 /* HealthBar.atlas in Resources */,
 				F25619D017690A9600008E34 /* flag_poland.png in Resources */,
 				F20688581768EFBD00771F36 /* InfoPlist.strings in Resources */,
 			);
