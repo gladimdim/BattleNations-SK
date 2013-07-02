@@ -8,7 +8,6 @@
 
 #import "HelloScene.h"
 #import "GameLogic.h"
-#import "GameDictProcessor.h"
 #import "Animator.h"
 #import "DataPoster.h"
 
@@ -16,10 +15,10 @@
 @property BOOL contentCreated;
 @property int horizontalStep;
 @property int verticalStep;
-@property (strong) GameDictProcessor *gameObj;
+
 @property BOOL moving;
 @property (strong) NSArray *unitWasSelectedPosition;
-@property NSMutableArray *arrayOfMoves;
+
 @property (strong) NSMutableArray *arrayOfStates;
 @property BOOL bMyTurn;
 @property NSString *currentPlayerID;

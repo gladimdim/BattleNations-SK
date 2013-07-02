@@ -7,6 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "GameDictProcessor.h"
 
 @interface HelloScene : SKScene
 
@@ -14,4 +15,6 @@
 -(NSInteger) undoTurnAndReturnWhichTurn;
 @property (copy, nonatomic) void (^callBackBlockTurnMade) (NSInteger);
 -(void) sendGameToServer;
+@property NSMutableArray *arrayOfMoves;
+@property (strong) GameDictProcessor *gameObj;
 @end

@@ -10,6 +10,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import "HelloScene.h"
 #import "GameDictProcessor.h"
+#import "DataPoster.h"
 @interface GameBoardViewController ()
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *btnMenu;
 @property (strong, nonatomic) IBOutlet UIButton *btnUndo;
@@ -67,7 +68,7 @@
 }
 
 - (IBAction)btnSendPressed:(id)sender {
-    [self.helloScene sendGameToServer];
+    [self sendGameToServer];
 }
 
 - (IBAction)btnMenuPressed:(id)sender {
@@ -84,6 +85,24 @@
         [self.menuView setFrame:CGRectMake(280, -400, 200, 100)];
     }
     [UIView commitAnimations];
+}
+
+-(void) sendGameToServer {
+    NSString *playerID = [[NSUserDefaults standardUserDefaults] stringForKey:@"playerID"];
+    if ([self.helloScene.gameObj isMyTurn:playerID]) {
+        DataPoster *poster = [[DataPoster alloc] init];
+        [self.helloScene.gameObj changeTurnToOtherPlayer];
+        [poster sendMoves:self.helloScene.arrayOfMoves forGame:self.helloScene.gameObj withCallBack:^(BOOL success) {
+            NSLog(@"Sent moves: %@", success ? @"YES" : @"NO");
+            [self toggleMenu];
+            self.navigationItem.title = NSLocalizedString(@"Turn sent", nil);
+            self.btnMenu.enabled = NO;
+        }];
+    }
+    else {
+        NSLog(@"Sending denied: it is not your turn");
+        self.navigationItem.title = NSLocalizedString(@"Not your turn", nil);
+    }
 }
 
 @end
