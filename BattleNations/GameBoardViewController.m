@@ -37,8 +37,9 @@
     
     self.helloScene = [[HelloScene alloc] initWithSize:self.view.frame.size gameObj:self.dictOfGame];
     SKView *spriteView = (SKView *) self.view;
+    UIButton *buttonUndo = self.btnUndo;
     self.helloScene.callBackBlockTurnMade = ^(NSInteger turn) {
-         [self.btnUndo setTitle:[NSString stringWithFormat:NSLocalizedString(@"Undo %i/5", nil), turn] forState:UIControlStateNormal];
+         [buttonUndo setTitle:[NSString stringWithFormat:NSLocalizedString(@"Undo %i/5", nil), turn] forState:UIControlStateNormal];
     };
     [spriteView presentScene:self.helloScene];
 }

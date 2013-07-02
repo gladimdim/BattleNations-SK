@@ -167,7 +167,6 @@
             if (position[0] == attackerCoords[0] && position[1] == attackerCoords[1]) {
                 NSInteger damageValue = 0;
                 NSInteger distance = abs([attackerCoords[0] integerValue] - [targetCoords[0] integerValue]) + fabs( [attackerCoords[1] integerValue] - [targetCoords[1] integerValue]);
-                NSInteger meleeAttack = 1;
                 //find the value of attacker's damage strength
                 //melee attack
                 if (distance == 1) {
@@ -245,7 +244,7 @@
             NSDictionary *unit = [topUnit objectForKey:[topUnit allKeys][0]];
             NSArray *position = (NSArray *) [unit objectForKey:@"position"];
             if (position[0] == healerCoords[0] && position[1] == healerCoords[1]) {
-                NSInteger healValue = [unit valueForKey:@"heal"];
+                NSInteger healValue = [[unit valueForKey:@"heal"] integerValue];
 
                 NSMutableDictionary *dictOfGame = [NSMutableDictionary dictionaryWithDictionary:gameObj.dictOfGame];
                 NSMutableDictionary *dictPlayer = [NSMutableDictionary dictionaryWithDictionary:[dictOfGame objectForKey:playerID]];

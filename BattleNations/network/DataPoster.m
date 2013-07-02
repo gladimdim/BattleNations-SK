@@ -28,7 +28,7 @@
     [jsonDict setObject:gameObj.dictOfGame forKey:@"final-table"];
     [jsonDict setObject:[[NSUserDefaults standardUserDefaults] stringForKey:@"playerID"]  forKey:@"player-id"];
     NSError *err;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict options:NSJSONReadingAllowFragments error:&err];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict options:NSJSONWritingPrettyPrinted error:&err];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setValue:[NSString stringWithFormat:@"%d", [jsonData length]] forHTTPHeaderField:@"Content-Length"];
