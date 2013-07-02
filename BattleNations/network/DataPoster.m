@@ -68,14 +68,14 @@
     NSString *string = [[NSString alloc] initWithData:self.receivedData encoding:NSWindowsCP1251StringEncoding];
     //  NSLog(@"response for rate: %@", string);
     if (string) {
-        NSError *err;
-        NSDictionary *returnDict = [NSJSONSerialization JSONObjectWithData:self.receivedData options:NSJSONReadingAllowFragments error:&err];
-        self.callBackBlock(returnDict);
+       // NSError *err;
+       // NSDictionary *returnDict = [NSJSONSerialization JSONObjectWithData:self.receivedData options:NSJSONReadingAllowFragments error:&err];
+        self.callBackBlock(YES);
     }
 }
 
 -(void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     NSLog(@"Error during getting list of games: %@", [error localizedDescription]);
-    self.callBackBlock(nil);
+    self.callBackBlock(NO);
 }
 @end

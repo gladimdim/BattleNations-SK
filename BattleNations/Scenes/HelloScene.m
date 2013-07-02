@@ -292,6 +292,8 @@
             if (CGRectContainsPoint(node.frame, oldPoint)) {
                 NSLog(@"found sprite");
                 if ([self.gameLogic canMoveFrom:initPosition to:newGameCoordinates forPlayerID:playerID inGame:self.gameObj]) {
+                    SKAction *actionMove = [SKAction moveTo:[self.gameLogic gameToUIKitCoordinate:newGameCoordinates] duration:0.5f];
+                    [node runAction:actionMove completion:^(void) {
                     //run animation of sprite's move. When animation is done - do necessary tasks to update gameObj with new coordinates.
                     //update gameObj dictionary with new position of unit
                     //add gameObj to arrayOfMoves
@@ -309,6 +311,7 @@
                     [self initObject];
                     self.unitWasSelectedPosition = nil;
                     return;
+                    }];
                 }
                 else {
                     NSLog(@"Denied movement of unit");
