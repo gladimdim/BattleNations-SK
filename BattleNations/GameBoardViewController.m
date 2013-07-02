@@ -9,7 +9,7 @@
 #import "GameBoardViewController.h"
 #import <SpriteKit/SpriteKit.h>
 #import "HelloScene.h"
-
+#import "GameDictProcessor.h"
 @interface GameBoardViewController ()
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *btnMenu;
 @property (strong, nonatomic) IBOutlet UIButton *btnUndo;
@@ -29,17 +29,27 @@
     spriteView.showsNodeCount = YES;
     //[self.navigationController setNavigationBarHidden:YES];
     NSLog(@"view size: %@", NSStringFromCGSize(self.view.frame.size));
+    GameDictProcessor *gameObj = [[GameDictProcessor alloc] initWithDictOfGame:self.dictOfGame gameLogic:nil];
+    NSString *sPlayerID = [[NSUserDefaults standardUserDefaults] stringForKey:@"playerID"];
+    BOOL myTurn = [gameObj isMyTurn:sPlayerID];
+    if (myTurn) {
+        self.navigationItem.title = NSLocalizedString(@"Make your turn 0/5", nil);
+    }
+    else {
+        self.navigationItem.title = NSLocalizedString(@"Wait for opponent", nil);
+    }
     [self.btnUndo setTitle:[NSString stringWithFormat:NSLocalizedString(@"Undo %i/5", nil), 0] forState:UIControlStateNormal];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     self.helloScene = [[HelloScene alloc] initWithSize:self.view.frame.size gameObj:self.dictOfGame];
     SKView *spriteView = (SKView *) self.view;
     UIButton *buttonUndo = self.btnUndo;
+    UINavigationItem *navItem = self.navigationItem;
     self.helloScene.callBackBlockTurnMade = ^(NSInteger turn) {
-         [buttonUndo setTitle:[NSString stringWithFormat:NSLocalizedString(@"Undo %i/5", nil), turn] forState:UIControlStateNormal];
+        navItem.title = [NSString stringWithFormat:NSLocalizedString(@"Make turn %i/5", nil), turn];
+        [buttonUndo setTitle:[NSString stringWithFormat:NSLocalizedString(@"Undo %i/5", nil), turn] forState:UIControlStateNormal];
     };
     [spriteView presentScene:self.helloScene];
 }
