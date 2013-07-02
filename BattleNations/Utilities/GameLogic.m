@@ -256,6 +256,11 @@
                     NSArray *position2 = (NSArray *) [unit2 objectForKey:@"position"];
                     if (position2[0] == targetCoords[0] && position2[1] == targetCoords[1]) {
                         NSInteger initHealth = [[unit2 valueForKey:@"level_life"] integerValue];
+                        //if health of target unit is 100 or more  - return nil
+                        //returned nil value will be handled by HelloScene
+                        if (initHealth >= 100) {
+                            return nil;
+                        }
                         NSInteger finalHeath = initHealth + healValue > 100 ? 100 : initHealth + healValue;
                         [unit2 setObject:@(finalHeath) forKey:@"level_life"];
                         [topUnit2 setObject:unit2 forKey:[topUnit2 allKeys][0]];

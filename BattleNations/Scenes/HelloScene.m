@@ -247,6 +247,9 @@
                     self.unitNameSelectedInBank = nil;
                     self.unitWasSelectedPosition = nil;
                 }
+                else {
+                    return;
+                }
             }
             else {
                 NSLog(@"Cannot attack.");
