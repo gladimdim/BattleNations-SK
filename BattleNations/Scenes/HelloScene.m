@@ -256,10 +256,14 @@
                         labelHealing.fontColor = [UIColor greenColor];
                         labelHealing.fontSize = 20;
                         labelHealing.text = [NSString stringWithFormat:@"+%@", [healValue stringValue]];
-                        labelHealing.position = [self.gameLogic gameToUIKitCoordinate:targetPosition];
+                        CGPoint targetPoint = [self.gameLogic gameToUIKitCoordinate:targetPosition];
+                        targetPoint.y = targetPoint.y + 30;
+                        labelHealing.position = targetPoint;
                         [self addChild:labelHealing];
-                        SKAction *actionMove = [SKAction moveTo:CGPointMake(labelHealing.position.x, labelHealing.position.y + 30) duration:1.0f];
-                        [labelHealing runAction:actionMove completion:^(void) {
+                        SKAction *actionScaleUp = [SKAction scaleTo:2.0f duration:0.5f];
+                        SKAction *actionScaleDown = [SKAction scaleTo:1.0f duration:0.5f];
+                        SKAction *sequence = [SKAction sequence:@[actionScaleUp, actionScaleDown]];
+                        [labelHealing runAction:sequence completion:^(void) {
                             [labelHealing removeFromParent];
                         }];
                     }
