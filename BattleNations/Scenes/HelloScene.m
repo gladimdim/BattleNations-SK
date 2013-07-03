@@ -234,7 +234,11 @@
             [Animator animateSpriteDeselection:self.selectedSprite];
             BOOL canHeal = [self.gameLogic canAttackFrom:initPosition to:targetPosition forPlayerID:playerID inGame:self.gameObj];
             if (canHeal) {
-                NSDictionary *newDictOfGame = [self.gameLogic healUnitFrom:self.unitWasSelectedPosition fromPlayerID:playerID toUnit:targetPosition forGame:self.gameObj];
+                NSDictionary *dictHealing = [self.gameLogic healUnitFrom:self.unitWasSelectedPosition fromPlayerID:playerID toUnit:targetPosition forGame:self.gameObj];
+                NSLog(@"healed for: %@", [dictHealing objectForKey:@"healValue"]);
+                NSNumber *healValue = [dictHealing objectForKey:@"healValue"];
+                
+                NSDictionary *newDictOfGame = [dictHealing objectForKey:@"dictOfGame"];
                 if (newDictOfGame) {
                     GameDictProcessor *newGameObj = [[GameDictProcessor alloc] initWithDictOfGame:newDictOfGame gameLogic:self.gameLogic];
                     NSArray *arrayWithoutBool = @[initPosition[0], initPosition[1]];
@@ -246,6 +250,19 @@
                     [self initObject];
                     self.unitNameSelectedInBank = nil;
                     self.unitWasSelectedPosition = nil;
+                    //show label with heal value
+                    if (healValue) {
+                        SKLabelNode *labelHealing = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
+                        labelHealing.fontColor = [UIColor greenColor];
+                        labelHealing.fontSize = 20;
+                        labelHealing.text = [NSString stringWithFormat:@"+%@", [healValue stringValue]];
+                        labelHealing.position = [self.gameLogic gameToUIKitCoordinate:targetPosition];
+                        [self addChild:labelHealing];
+                        SKAction *actionMove = [SKAction moveTo:CGPointMake(labelHealing.position.x, labelHealing.position.y + 30) duration:1.0f];
+                        [labelHealing runAction:actionMove completion:^(void) {
+                            [labelHealing removeFromParent];
+                        }];
+                    }
                 }
                 else {
                     return;

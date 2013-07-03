@@ -235,6 +235,7 @@
     return nil;
 }
 
+//returns dictionatary with two objects: healValue and updated dictOfGame
 -(NSDictionary *) healUnitFrom:(NSArray *) healerCoords fromPlayerID:(NSString *) playerID toUnit:(NSArray *) targetCoords forGame:(GameDictProcessor *) gameObj {
     NSDictionary *dictOfHealer = [NSDictionary dictionaryWithDictionary:[gameObj.dictOfGame objectForKey:playerID]];
     if (dictOfHealer) {
@@ -268,7 +269,9 @@
                         [fieldArray addObject:topUnit2];
                         [dictPlayer setObject:fieldArray forKey:@"field"];
                         [dictOfGame setObject:dictPlayer forKey:playerID];
-                        return dictOfGame;
+                        //return dict which contains two objects: healValue (to be displayed on screen) and actual updated dictOfGame;
+                        NSDictionary *dictToReturn = @{@"healValue": @(finalHeath - initHealth), @"dictOfGame": dictOfGame};
+                        return dictToReturn;
                     }
                 }
             }
