@@ -201,7 +201,8 @@
                             //pack new player dict into final dict
                             [dictOfGame setObject:dictPlayer forKey:targetPlayerID];
                             NSLog(@"placing new unit");
-                            return dictOfGame;
+                            NSDictionary *dictToReturn = @{@"damageValue": @(damageValue), @"dictOfGame": dictOfGame};
+                            return dictToReturn;
 
                         }
                         //the unit is wounded. we need to modify it's level_life and pack it back.
@@ -212,7 +213,8 @@
                             [fieldArray addObject:topUnit2];
                             [dictPlayer setObject:fieldArray forKey:@"field"];
                             [dictOfGame setObject:dictPlayer forKey:targetPlayerID];
-                            return dictOfGame;
+                            NSDictionary *dictToReturn = @{@"damageValue": @(damageValue), @"dictOfGame": dictOfGame};
+                            return dictToReturn;
                         }
 /*
                         //pack new unit into field
@@ -289,7 +291,7 @@
         NSString *unitName = (NSString *) [topUnit allKeys] [0];
         NSDictionary *unit = [topUnit objectForKey:[topUnit allKeys][0]];
         NSArray *positionOfUnit = (NSArray *) [unit objectForKey:@"position"];
-        if (position[0] == positionOfUnit[0] && positionOfUnit[1] == positionOfUnit[1]) {
+        if (position[0] == positionOfUnit[0] && position[1] == positionOfUnit[1]) {
             if ([unitName isEqualToString:@"healer"]) {
                 return true;
             }

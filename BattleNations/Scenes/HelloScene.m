@@ -281,7 +281,9 @@
         else if (!healerPresent) {
             BOOL canAttack = [self.gameLogic canAttackFrom:initPosition to:targetPosition forPlayerID:playerID inGame:self.gameObj];
             if (canAttack) {
-                NSDictionary *newDictOfGame = [self.gameLogic attackUnitFrom:initPosition fromPlayerID:playerID toUnit:targetPosition forGame:self.gameObj];
+                NSDictionary *dictAttack = [self.gameLogic attackUnitFrom:initPosition fromPlayerID:playerID toUnit:targetPosition forGame:self.gameObj];
+                NSNumber *damageValue = [dictAttack objectForKey:@"damageValue"];
+                NSDictionary *newDictOfGame = [dictAttack objectForKey:@"dictOfGame"];
                 if (newDictOfGame) {
                     GameDictProcessor *newGameObj = [[GameDictProcessor alloc] initWithDictOfGame:newDictOfGame gameLogic:self.gameLogic];
                     NSArray *arrayWithoutBool = @[initPosition[0], initPosition[1]];
@@ -293,6 +295,25 @@
                     [self initObject];
                     self.unitNameSelectedInBank = nil;
                     self.unitWasSelectedPosition = nil;
+                    
+                    //show label with damage value
+                    if (damageValue) {
+                        SKLabelNode *labelHealing = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
+                        labelHealing.fontColor = [UIColor redColor];
+                        labelHealing.fontSize = 20;
+                        labelHealing.text = [NSString stringWithFormat:@"+%@", [damageValue stringValue]];
+                        CGPoint targetPoint = [self.gameLogic gameToUIKitCoordinate:targetPosition];
+                        targetPoint.y = targetPoint.y + 30;
+                        labelHealing.position = targetPoint;
+                        [self addChild:labelHealing];
+                        SKAction *actionScaleUp = [SKAction scaleTo:2.0f duration:0.5f];
+                        SKAction *actionScaleDown = [SKAction scaleTo:1.0f duration:0.5f];
+                        SKAction *sequence = [SKAction sequence:@[actionScaleUp, actionScaleDown]];
+                        [labelHealing runAction:sequence completion:^(void) {
+                            [labelHealing removeFromParent];
+                        }];
+                    }
+
                 }
             }
             else {
