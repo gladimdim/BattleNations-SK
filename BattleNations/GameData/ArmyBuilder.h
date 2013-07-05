@@ -17,4 +17,6 @@
 -(NSDictionary *) super_unit;
 -(NSDictionary *) healer;
 -(ArmyBuilder *) initWithNationsName:(NSString *) nationName;
++(NSDictionary *) buildBankForNation:(NSString *) nationName;
++(NSDictionary *) initForBank;
 @end

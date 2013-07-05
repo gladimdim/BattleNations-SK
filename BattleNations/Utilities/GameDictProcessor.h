@@ -27,7 +27,6 @@
 -(NSArray *) unitPresentAtPosition:(CGPoint ) spritePoint winSize:(CGSize) winSize horizontalStep:(int) hStep verticalStep:(int) vStep currentPlayerID:(NSString *) playerID;
 -(NSString *) leftPlayerID;
 -(NSString *) rightPlayerID;
--(BOOL) isMyTurn:(NSString *) playerID;
 -(NSString *) getGameID;
 -(void) changeTurnToOtherPlayer;
 -(NSArray *) getArrayOfUnitNamesInBankForPlayerID:(NSString *) playerID;

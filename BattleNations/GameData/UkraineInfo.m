@@ -38,4 +38,14 @@
     return dictToReturn;
 }
 
++(NSDictionary *) initForBank {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:@(3) forKey:@"infantry"];
+    [dict setObject:@(3) forKey:@"light_cavalry"];
+    [dict setObject:@(2) forKey:@"veteran"];
+    [dict setObject:@(2) forKey:@"healer"];
+    [dict setObject:@(1) forKey:@"super_unit"];
+    return dict;
+}
+
 @end

@@ -28,5 +28,5 @@
 @property int verticalStep;
 
 -(BOOL) healerPresentAt:(NSArray *) position forGame:(GameDictProcessor *) gameObj forPlayerID:(NSString *) playerID;
-
++(NSDictionary *) initPlayerInGameWithNation:(NSString *) nationName forDictOfGame:(NSDictionary *) dictOfGame;
 @end

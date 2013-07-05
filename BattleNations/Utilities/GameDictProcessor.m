@@ -68,7 +68,7 @@
     }
     return nil;
 }
-
+/*
 -(BOOL) isMyTurn:(NSString *) playerID {
     BOOL leftPlayerTurn = [[NSNumber numberWithInt:[[self.dictOfGame valueForKey:@"left_army_turn"] integerValue]] boolValue]; //[[self.gameObj.dictOfGame valueForKey:@"left_army_turn"] isEqualToString:@"true"] ? YES: NO;
     if ([playerID isEqualToString:[self.dictOfGame valueForKey:@"player_left"]] && leftPlayerTurn) {
@@ -78,12 +78,13 @@
         return YES;
     }
     return NO;
-}
+}*/
 
 -(NSString *) getGameID {
     return [self.dictOfGame valueForKey:@"game_id"];
 }
 
+/*
 //changes "left_army_turn" to true or false depending on which site of deck current user is
 -(void) changeTurnToOtherPlayer {
     if ([self isMyTurn:[[NSUserDefaults standardUserDefaults] stringForKey:@"playerID"]]) {
@@ -93,7 +94,7 @@
         [dict setValue:[NSNumber numberWithBool:!leftPlayerTurn] forKey:@"left_army_turn"];
         self.dictOfGame = [NSDictionary dictionaryWithDictionary:dict];
     }
-}
+}*/
 
 -(NSArray *) getArrayOfUnitNamesInBankForPlayerID:(NSString *) playerID {
     NSDictionary *playerDict = [self.dictOfGame objectForKey:playerID];

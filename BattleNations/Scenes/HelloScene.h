@@ -8,13 +8,15 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import "GameDictProcessor.h"
+#import <GameKit/GameKit.h>
 
 @interface HelloScene : SKScene
 
--(HelloScene *) initWithSize:(CGSize) size gameObj:(NSDictionary *) gameObject;
+-(HelloScene *) initWithSize:(CGSize) size dictOfGame:(NSDictionary *) dictOfGame;
 -(NSInteger) undoTurnAndReturnWhichTurn;
 @property (copy, nonatomic) void (^callBackBlockTurnMade) (NSInteger);
 -(void) sendGameToServer;
 @property NSMutableArray *arrayOfMoves;
-@property (strong) GameDictProcessor *gameObj;
+@property GKTurnBasedMatch *match;
+@property GameDictProcessor *gameObj;
 @end

@@ -21,4 +21,17 @@
         return nil;
     }
 }
+
++(NSDictionary *) buildBankForNation:(NSString *) nationName {
+    NSMutableDictionary *dictBank = [NSMutableDictionary dictionary];
+    if ([nationName isEqualToString:@"ukraine"]) {
+        return dictBank = [NSMutableDictionary dictionaryWithDictionary:[UkraineInfo initForBank]];
+    }
+    else if ([nationName isEqualToString:@"poland"]) {
+        return dictBank = [NSMutableDictionary dictionaryWithDictionary:[Poland initForBank]];
+    }
+    else {
+        return nil;
+    }
+}
 @end

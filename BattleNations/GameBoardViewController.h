@@ -10,6 +10,5 @@
 #import <GameKit/GameKit.h>
 
 @interface GameBoardViewController : UIViewController
-@property NSDictionary *dictOfGame;
-@property GKMatch *match;
+@property GKTurnBasedMatch *match;
 @end

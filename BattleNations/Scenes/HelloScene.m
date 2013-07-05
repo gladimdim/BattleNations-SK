@@ -18,7 +18,6 @@
 
 @property BOOL moving;
 @property (strong) NSArray *unitWasSelectedPosition;
-
 @property (strong) NSMutableArray *arrayOfStates;
 @property BOOL bMyTurn;
 @property NSString *currentPlayerID;
@@ -34,10 +33,10 @@
 
 @implementation HelloScene
 
--(HelloScene *) initWithSize:(CGSize)size gameObj:(NSDictionary *)gameObject {
+-(HelloScene *) initWithSize:(CGSize)size dictOfGame:(NSDictionary *)dictOfGame {
     self = [super initWithSize:size];
     if (self) {
-        self.gameObj = [[GameDictProcessor alloc] initWithDictOfGame:gameObject gameLogic:[[GameLogic alloc] initWithBoardSize:self.size]];
+        self.gameObj = [[GameDictProcessor alloc] initWithDictOfGame:dictOfGame gameLogic:[[GameLogic alloc] initWithBoardSize:self.size]];
         self.downloadedGameObj = self.gameObj;
         self.arrayOfMoves = [NSMutableArray array];
         self.arrayOfStates = [NSMutableArray array];
@@ -64,9 +63,7 @@
     self.horizontalStep = floor(size.width / 9);
     self.verticalStep = floor(size.height / 6);
     NSLog(@"horizontal step: %i, vertical: %i", self.horizontalStep, self.verticalStep);
-    self.currentPlayerID = [[NSUserDefaults standardUserDefaults] stringForKey:@"playerID"];
-    self.bMyTurn = [self.gameObj isMyTurn:self.currentPlayerID];
-
+    self.currentPlayerID = [GKLocalPlayer localPlayer].playerID;
     for (int i = 0; i < self.gameObj.arrayLeftField.count; i++) {
         [self placeUnit:self.gameObj.arrayLeftField[i] forLeftArmy:YES nationName:[self.gameObj.leftArmy valueForKey:@"nation" ]];
     }
@@ -209,14 +206,7 @@
         NSLog(@"Movement denied: There are already 5 moves");
         return;
     }
-    //if it is not our turn - return
-    if (![self.gameObj isMyTurn:self.currentPlayerID]) {
-        NSLog(@"Movement denied: it is not your turn");
-        return;
-    }
-    
     [self makeMoveFromPosition:self.unitWasSelectedPosition touchedPoint:touchPoint forPlayerID:self.currentPlayerID];
-    
 }
 
 -(void) makeMoveFromPosition:(NSArray *) initPosition touchedPoint:(CGPoint) touchPoint forPlayerID:(NSString *) playerID {
@@ -506,17 +496,11 @@
 }
 
 -(void) sendGameToServer {
-    if ([self.gameObj isMyTurn:self.currentPlayerID]) {
-        DataPoster *poster = [[DataPoster alloc] init];
-        [self.gameObj changeTurnToOtherPlayer];
-        [poster sendMoves:self.arrayOfMoves forGame:self.gameObj withCallBack:^(BOOL success) {
-            NSLog(@"Sent moves: %@", success ? @"YES" : @"NO");
-        }];
-    }
-    else {
-        NSLog(@"Sending denied: it is not your turn");
-    }
-
+    DataPoster *poster = [[DataPoster alloc] init];
+    [self.gameObj changeTurnToOtherPlayer];
+    [poster sendMoves:self.arrayOfMoves forGame:self.gameObj withCallBack:^(BOOL success) {
+        NSLog(@"Sent moves: %@", success ? @"YES" : @"NO");
+    }];
 }
 
 

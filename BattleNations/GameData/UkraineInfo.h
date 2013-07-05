@@ -15,4 +15,5 @@
 -(NSDictionary *) veteran;
 -(NSDictionary *) healer;
 -(NSDictionary *) super_unit;
++(NSDictionary *) initForBank;
 @end

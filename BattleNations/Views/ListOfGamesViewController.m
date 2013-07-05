@@ -88,7 +88,7 @@
             }
             self.arrayOfPlayersIDs = arrayOfPlayers;
             [self.tableView reloadData];
-            [self loadPlayerIDs];
+           // [self loadPlayerIDs];
         }
     }];
 }
@@ -135,7 +135,7 @@
     else {
         cell.backgroundColor = [UIColor grayColor];
     }
-    NSLog(@"current participant: %@", match.currentParticipant);
+
     GKTurnBasedParticipant *part1 = participants[0];
     UILabel *labelLeft = (UILabel *) [cell viewWithTag:2];
     labelLeft.text = part1.playerID;
@@ -156,50 +156,27 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ///[self performSegueWithIdentifier:@"showGameScene" sender:self];
-    GKTurnBasedMatch *match = self.arrayOfMatches[[self.tableView indexPathForSelectedRow].row];
-    [match loadMatchDataWithCompletionHandler:^(NSData *matchData, NSError *error) {
-        if (!error) {
-            NSDictionary *dict = (NSDictionary *) [NSKeyedUnarchiver unarchiveObjectWithData:matchData];
-            NSLog(@"dict: %@", dict);
-        }
-        else {
-            
-        }
-    }];
-    
-    
-    NSDictionary *lol = @{@"message": @"hi dima2"};
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:lol];
-    GKTurnBasedParticipant *oppositePart;
-    for (GKTurnBasedParticipant *part in match.participants) {
-        if (![[GKLocalPlayer localPlayer].playerID isEqualToString:part.playerID]) {
-            oppositePart = part;
-            break;
-        }
-    }
-    [match endTurnWithNextParticipants:@[oppositePart] turnTimeout:GKTurnTimeoutDefault matchData:data completionHandler:^(NSError *err) {
-        if (err) {
-            NSLog(@"erorr during sending turn: %@", err.localizedDescription);
-        }
-        else {
-            NSLog(@"turn sent!");
-        }
-    }];
-
+    [self performSegueWithIdentifier:@"showGameScene" sender:self];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showGameScene"]) {
-        /*GameBoardViewController *gc = (GameBoardViewController*) segue.destinationViewController;
-        GameDictProcessor *gd = [self.arrayOfGames objectAtIndex:[self.tableView indexPathForSelectedRow].row];
-        gc.dictOfGame = gd.dictOfGame;
-         */
-                                                                                                                                
+        GameBoardViewController *gc = (GameBoardViewController*) segue.destinationViewController;
+        GKTurnBasedMatch *match = (GKTurnBasedMatch *) [self.arrayOfMatches objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+        gc.match = match;
     }
 }
 
 - (IBAction)btnRefreshPressed:(id)sender {
     [self getListOfGames];
+}
+- (IBAction)btnRemoveGamesPressed:(id)sender {
+    for (GKTurnBasedMatch *match in self.arrayOfMatches) {
+        [match removeWithCompletionHandler:^(NSError *error) {
+            if (error) {
+                NSLog(@"Error while deleting game: %@", error.localizedDescription);
+            }
+        }];
+    }
 }
 @end

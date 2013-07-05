@@ -9,6 +9,7 @@
 #import "GameLogic.h"
 #import "ArmyBuilder.h"
 #import "GameDictProcessor.h"
+#import <GameKit/GameKit.h>
 
 @interface GameLogic()
 @property CGSize boardSize;
@@ -298,6 +299,25 @@
         }
     }
     return false;
+}
+
++(NSDictionary *) initPlayerInGameWithNation:(NSString *) nationName forDictOfGame:(NSDictionary *)dictOfGame {
+    NSMutableDictionary *dictToReturn = [[NSMutableDictionary alloc] init];
+    NSString *playerID = [GKLocalPlayer localPlayer].playerID;
+    if (!dictOfGame) {
+        [dictToReturn setObject:playerID forKey:@"player_left"];
+    }
+    else {
+        dictToReturn = [NSMutableDictionary dictionaryWithDictionary:dictOfGame];
+        [dictToReturn setObject:playerID forKey:@"player_right"];
+    }
+    NSMutableDictionary *dictPlayer = [NSMutableDictionary dictionary];
+    //set this dummy game_id so I do not have to rewrite a lot of logic
+    [dictToReturn setObject:@"123" forKey:@"game_id"];
+    [dictPlayer setObject:nationName forKey:@"nation"];
+    [dictPlayer setObject:[ArmyBuilder buildBankForNation:nationName] forKey:@"bank"];
+    [dictToReturn setObject:dictPlayer forKey:playerID];
+    return dictToReturn;
 }
 
 @end
