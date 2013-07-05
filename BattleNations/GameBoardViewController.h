@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GameKit/GameKit.h>
 
 @interface GameBoardViewController : UIViewController
 @property NSDictionary *dictOfGame;
+@property GKMatch *match;
 @end

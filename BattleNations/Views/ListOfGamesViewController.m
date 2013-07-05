@@ -15,6 +15,8 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property NSArray *arrayOfGames;
 - (IBAction)btnRefreshPressed:(id)sender;
+@property NSArray *arrayOfMatches;
+@property NSArray *arrayOfPlayersIDs;
 @end
 
 @implementation ListOfGamesViewController
@@ -45,7 +47,7 @@
 }
 
 -(void) getListOfGames {
-    ListOfGamesGetter *getter = [[ListOfGamesGetter alloc] init];
+   /* ListOfGamesGetter *getter = [[ListOfGamesGetter alloc] init];
     [getter getListOfGamesFor:[[NSUserDefaults standardUserDefaults] stringForKey:@"playerID"] withCallBack:^(NSDictionary *dict, NSError *err) {
         if (err) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:err.localizedDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -69,7 +71,40 @@
             self.arrayOfGames = [NSArray arrayWithArray:arrayOfGameDicts];
             [self.tableView reloadData];
         }
+    }];*/
+    
+    [GKTurnBasedMatch loadMatchesWithCompletionHandler:^(NSArray *matches, NSError *error) {
+        if (matches) {
+          //  NSLog(@"matched: %@", matches);
+            self.arrayOfMatches = matches;
+            NSMutableArray *arrayOfPlayers = [NSMutableArray array];
+            for (GKTurnBasedMatch *match in matches) {
+                NSArray *participants = match.participants;
+                for (GKTurnBasedParticipant *part in participants) {
+                    if (part.playerID) {
+                        [arrayOfPlayers addObject:part.playerID];
+                    }
+                }
+            }
+            self.arrayOfPlayersIDs = arrayOfPlayers;
+            [self.tableView reloadData];
+            [self loadPlayerIDs];
+        }
     }];
+}
+
+-(void) loadPlayerIDs {
+    [GKPlayer loadPlayersForIdentifiers:self.arrayOfPlayersIDs withCompletionHandler:^(NSArray *players, NSError *error) {
+        if (error !=nil) {
+            for (GKPlayer *player in players) {
+                NSLog(@"player names: %@", player.displayName);
+            }
+        }
+        else {
+            NSLog(@"error during loading player ids: %@", error.localizedDescription);
+        }
+    }];
+
 }
 
 #pragma mark - UITableView Datasource
@@ -79,7 +114,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.arrayOfGames.count;
+    return self.arrayOfMatches.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -91,34 +126,76 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    GameDictProcessor *gameObj = (GameDictProcessor *) self.arrayOfGames[indexPath.row];
-    
+    //GameDictProcessor *gameObj = (GameDictProcessor *) self.arrayOfGames[indexPath.row];
+    GKTurnBasedMatch *match = (GKTurnBasedMatch *) self.arrayOfMatches[indexPath.row];
+    NSArray *participants = match.participants;
+    if ([[GKLocalPlayer localPlayer].playerID isEqualToString:match.currentParticipant.playerID]) {
+        cell.backgroundColor = [UIColor greenColor];
+    }
+    else {
+        cell.backgroundColor = [UIColor grayColor];
+    }
+    NSLog(@"current participant: %@", match.currentParticipant);
+    GKTurnBasedParticipant *part1 = participants[0];
     UILabel *labelLeft = (UILabel *) [cell viewWithTag:2];
-    labelLeft.text = [gameObj leftPlayerID];
-    
+    labelLeft.text = part1.playerID;
+    GKTurnBasedParticipant *part2 = (GKTurnBasedParticipant *) participants[1];
     UILabel *labelRight = (UILabel *) [cell viewWithTag:3];
-    labelRight.text = [gameObj rightPlayerID];
+    labelRight.text = part2.playerID;
     
-    UIImageView *leftImage = (UIImageView *) [cell viewWithTag:1];
+  /*  UIImageView *leftImage = (UIImageView *) [cell viewWithTag:1];
     leftImage.image = [gameObj imageForLeftPlayersNation];
     
     UIImageView *rightImage = (UIImageView *) [cell viewWithTag:4];
     rightImage.image = [gameObj imageForRightPlayersNation];
-
+*/
     return cell;
 }
 
 #pragma mark - UITableView Delegate methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"showGameScene" sender:self];
+    
+    ///[self performSegueWithIdentifier:@"showGameScene" sender:self];
+    GKTurnBasedMatch *match = self.arrayOfMatches[[self.tableView indexPathForSelectedRow].row];
+    [match loadMatchDataWithCompletionHandler:^(NSData *matchData, NSError *error) {
+        if (!error) {
+            NSDictionary *dict = (NSDictionary *) [NSKeyedUnarchiver unarchiveObjectWithData:matchData];
+            NSLog(@"dict: %@", dict);
+        }
+        else {
+            
+        }
+    }];
+    
+    
+    NSDictionary *lol = @{@"message": @"hi dima2"};
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:lol];
+    GKTurnBasedParticipant *oppositePart;
+    for (GKTurnBasedParticipant *part in match.participants) {
+        if (![[GKLocalPlayer localPlayer].playerID isEqualToString:part.playerID]) {
+            oppositePart = part;
+            break;
+        }
+    }
+    [match endTurnWithNextParticipants:@[oppositePart] turnTimeout:GKTurnTimeoutDefault matchData:data completionHandler:^(NSError *err) {
+        if (err) {
+            NSLog(@"erorr during sending turn: %@", err.localizedDescription);
+        }
+        else {
+            NSLog(@"turn sent!");
+        }
+    }];
+
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showGameScene"]) {
-        GameBoardViewController *gc = (GameBoardViewController*) segue.destinationViewController;
+        /*GameBoardViewController *gc = (GameBoardViewController*) segue.destinationViewController;
         GameDictProcessor *gd = [self.arrayOfGames objectAtIndex:[self.tableView indexPathForSelectedRow].row];
         gc.dictOfGame = gd.dictOfGame;
+         */
+                                                                                                                                
     }
 }
 

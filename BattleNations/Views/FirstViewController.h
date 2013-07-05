@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GameKit/GameKit.h>
 
-@interface FirstViewController : UITableViewController <UITableViewDataSource>
+@interface FirstViewController : UITableViewController <UITableViewDataSource, GKTurnBasedMatchmakerViewControllerDelegate>
 
 @end
