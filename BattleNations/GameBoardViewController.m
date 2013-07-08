@@ -114,11 +114,11 @@
 -(void) toggleArmySelection {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5f];
-    if (self.armySelectionView.frame.origin.x < 0) {
+    if (self.armySelectionView.frame.origin.y >= 500) {
         [self.armySelectionView setFrame:CGRectMake(145, 145, 200, 75)];
     }
     else {
-        [self.armySelectionView setFrame:CGRectMake(-400, 145, 200, 75)];
+        [self.armySelectionView setFrame:CGRectMake(145, 500, 200, 75)];
     }
     [UIView commitAnimations];
 }
