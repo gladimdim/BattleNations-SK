@@ -15,7 +15,6 @@
 -(HelloScene *) initWithSize:(CGSize) size dictOfGame:(NSDictionary *) dictOfGame;
 -(NSInteger) undoTurnAndReturnWhichTurn;
 @property (copy, nonatomic) void (^callBackBlockTurnMade) (NSInteger);
--(void) sendGameToServer;
 @property NSMutableArray *arrayOfMoves;
 @property GKTurnBasedMatch *match;
 @property GameDictProcessor *gameObj;

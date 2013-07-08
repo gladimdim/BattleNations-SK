@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ArmyBuilder.h"
 
-@interface Poland : ArmyBuilder
+@interface Poland : ArmyBuilder <ArmyBuilder>
 -(NSDictionary *) infantry;
 -(NSDictionary *) light_cavalry;
 -(NSDictionary *) heavy_cavalry;

@@ -495,13 +495,4 @@
     }
 }
 
--(void) sendGameToServer {
-    DataPoster *poster = [[DataPoster alloc] init];
-    [self.gameObj changeTurnToOtherPlayer];
-    [poster sendMoves:self.arrayOfMoves forGame:self.gameObj withCallBack:^(BOOL success) {
-        NSLog(@"Sent moves: %@", success ? @"YES" : @"NO");
-    }];
-}
-
-
 @end

@@ -8,15 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-
-@interface ArmyBuilder : NSObject
+@protocol ArmyBuilder <NSObject>
 -(NSDictionary *) infantry;
 -(NSDictionary *) light_cavalry;
 -(NSDictionary *) heavy_cavalry;
 -(NSDictionary *) veteran;
 -(NSDictionary *) super_unit;
 -(NSDictionary *) healer;
++(NSDictionary *) initForBank;
+@end
+
+
+@interface ArmyBuilder : NSObject
 -(ArmyBuilder *) initWithNationsName:(NSString *) nationName;
 +(NSDictionary *) buildBankForNation:(NSString *) nationName;
-+(NSDictionary *) initForBank;
 @end

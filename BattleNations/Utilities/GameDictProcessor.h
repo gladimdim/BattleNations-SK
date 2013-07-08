@@ -10,10 +10,6 @@
 #import "GameLogic.h"
 @interface GameDictProcessor : NSObject
 
-/*-(NSDictionary *) getLeftArmy;
--(NSDictionary *) getRightArmy;
--(NSArray *) getLeftField;
--(NSArray *) getRightField;*/
 @property (strong) NSDictionary *dictOfGame;
 @property (strong) NSDictionary *leftArmy;
 @property (strong) NSDictionary *rightArmy;
@@ -28,7 +24,6 @@
 -(NSString *) leftPlayerID;
 -(NSString *) rightPlayerID;
 -(NSString *) getGameID;
--(void) changeTurnToOtherPlayer;
 -(NSArray *) getArrayOfUnitNamesInBankForPlayerID:(NSString *) playerID;
 -(NSDictionary *) getBankForPlayerID:(NSString *) playerID;
 -(NSArray *) getFieldForPlayerID:(NSString *) playerID;

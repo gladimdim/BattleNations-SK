@@ -24,7 +24,7 @@
     deviceToken = deviceToken ? deviceToken : @"";
     NSDictionary *jsonDict = [NSDictionary dictionaryWithObjects:@[username, email, deviceToken] forKeys:@[@"player-id", @"email", @"deviceToken"]];
     NSError *err;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict options:NSJSONReadingAllowFragments error:&err];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict options:NSJSONWritingPrettyPrinted error:&err];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setValue:[NSString stringWithFormat:@"%d", [jsonData length]] forHTTPHeaderField:@"Content-Length"];

@@ -152,6 +152,25 @@
     NSLog(@"we've got new match: %@", match);
     [viewController dismissViewControllerAnimated:YES completion:nil];
 }
+
+-(void) turnBasedMatchmakerViewController:(GKTurnBasedMatchmakerViewController *)viewController playerQuitForMatch:(GKTurnBasedMatch *)match {
+    for (GKTurnBasedParticipant *part in match.participants) {
+        if ([part.playerID isEqualToString:self.localPlayer.playerID]) {
+            [part setMatchOutcome:GKTurnBasedMatchOutcomeWon];
+            NSLog(@"Setting player won for playerQuitForMatch");
+        }
+        else {
+            NSLog(@"Setting player lost for playerQuitForMatch");
+            [part setMatchOutcome:GKTurnBasedMatchOutcomeLost];
+        }
+    }
+    [match endMatchInTurnWithMatchData:nil completionHandler:^(NSError *error) {
+        if (error) {
+            NSLog(@"error during playerQuitForMatch %@", error.localizedDescription);
+        }
+    }];
+    NSLog(@"Player quit and match ended");
+}
 /*****************************************/
 
 
