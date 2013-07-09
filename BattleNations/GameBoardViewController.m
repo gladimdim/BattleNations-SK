@@ -20,12 +20,18 @@
 @property NSDictionary *dictOfGame;
 @end
 
+#define FOG_VIEW_TAG_ID 20
+
 @implementation GameBoardViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    }
+
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     SKView *spriteView = (SKView *) self.view;
     spriteView.showsFPS = YES;
     spriteView.showsDrawCount = YES;
@@ -38,8 +44,11 @@
     }
     else {
         self.navigationItem.title = NSLocalizedString(@"Wait for opponent", nil);
+        self.btnMenu.enabled = NO;
+        [self showFogOverlay];
     }
     [self.btnUndo setTitle:[NSString stringWithFormat:NSLocalizedString(@"Undo %i/5", nil), 0] forState:UIControlStateNormal];
+
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -118,7 +127,7 @@
         [self.armySelectionView setFrame:CGRectMake(145, 145, 200, 75)];
     }
     else {
-        [self.armySelectionView setFrame:CGRectMake(145, 500, 200, 75)];
+        [self.armySelectionView setFrame:CGRectMake(145, 600, 200, 75)];
     }
     [UIView commitAnimations];
 }
@@ -136,22 +145,6 @@
 }
 
 -(void) sendGameToServer {
-    /*NSString *playerID = [[NSUserDefaults standardUserDefaults] stringForKey:@"playerID"];
-    if ([self.helloScene.gameObj isMyTurn:playerID]) {
-        DataPoster *poster = [[DataPoster alloc] init];
-        [self.helloScene.gameObj changeTurnToOtherPlayer];
-        [poster sendMoves:self.helloScene.arrayOfMoves forGame:self.helloScene.gameObj withCallBack:^(BOOL success) {
-            NSLog(@"Sent moves: %@", success ? @"YES" : @"NO");
-            [self toggleMenu];
-            self.navigationItem.title = NSLocalizedString(@"Turn sent", nil);
-            self.btnMenu.enabled = NO;
-        }];
-    }
-    else {
-        NSLog(@"Sending denied: it is not your turn");
-        self.navigationItem.title = NSLocalizedString(@"Not your turn", nil);
-    }*/
-     
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.helloScene.gameObj.dictOfGame];
     GKTurnBasedParticipant *oppositePart;
     for (GKTurnBasedParticipant *part in self.match.participants) {
@@ -165,12 +158,21 @@
             NSLog(@"erorr during sending turn: %@", err.localizedDescription);
         }
         else {
+            [self showFogOverlay];
+            self.btnMenu.enabled = NO;
+            [self toggleMenu];
+            self.navigationItem.title = NSLocalizedString(@"Move sent. Wait for opponent.", nil);
             NSLog(@"turn sent!");
         }
     }];
-
 }
 
-
+-(void) showFogOverlay {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [view setBackgroundColor:[UIColor grayColor]];
+    [view setAlpha:0.5f];
+    [view setTag:FOG_VIEW_TAG_ID];
+    [self.view addSubview:view];
+}
 
 @end
