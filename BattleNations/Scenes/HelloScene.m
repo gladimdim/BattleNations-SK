@@ -211,7 +211,7 @@
 
 -(void) makeMoveFromPosition:(NSArray *) initPosition touchedPoint:(CGPoint) touchPoint forPlayerID:(NSString *) playerID {
     
-    NSArray *targetPosition = [self.gameObj unitPresentAtPosition:touchPoint winSize:self.size horizontalStep:self.horizontalStep verticalStep:self.verticalStep currentPlayerID:self.currentPlayerID];
+    NSArray *targetPosition = [self.gameObj unitPresentAtPosition:touchPoint winSize:self.size horizontalStep:self.horizontalStep verticalStep:self.verticalStep currentPlayerID:playerID];
     
     //attack or heal or deselect
     BOOL healerPresent = [self.gameLogic healerPresentAt:self.unitWasSelectedPosition forGame:self.gameObj forPlayerID:playerID];
@@ -417,6 +417,7 @@
     //move[1] may contain array of destination position of unit, or string - name of unit to be placed at move[0]
     else {
         NSArray *move = [arrayLastMoves objectAtIndex:0];
+        self.unitWasSelectedPosition = move[0];
         //if object is NSArray (not the string actually) - it means there are two arrays with coordinate, so it is move
         if ([move[1] isKindOfClass:[NSArray class]]) {
             //we need to rescan all sprite to find which sprite was selected.
