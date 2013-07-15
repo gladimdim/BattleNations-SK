@@ -40,7 +40,7 @@
     NSLog(@"view size: %@", NSStringFromCGSize(self.view.frame.size));
     BOOL myTurn = [self.match.currentParticipant.playerID isEqualToString:[GKLocalPlayer localPlayer].playerID];
     if (myTurn) {
-        self.navigationItem.title = NSLocalizedString(@"Make your turn 0/5", nil);
+        self.navigationItem.title = NSLocalizedString(@"Turn 0/5", nil);
     }
     else {
         self.navigationItem.title = NSLocalizedString(@"Wait for opponent", nil);
@@ -62,8 +62,15 @@
     UIButton *buttonUndo = self.btnUndo;
     UINavigationItem *navItem = self.navigationItem;
     self.helloScene.callBackBlockTurnMade = ^(NSInteger turn) {
-        navItem.title = [NSString stringWithFormat:NSLocalizedString(@"Make turn %i/5", nil), turn];
+        navItem.title = [NSString stringWithFormat:NSLocalizedString(@"Turn %i/5", nil), turn];
         [buttonUndo setTitle:[NSString stringWithFormat:NSLocalizedString(@"Undo %i/5", nil), turn] forState:UIControlStateNormal];
+    };
+    self.helloScene.callBackBlockReplayTurnMade = ^(NSInteger turn) {
+        navItem.title = [NSString stringWithFormat:NSLocalizedString(@"Enemy's turn %i/5", nil), turn];
+        if (turn == 5) {
+            navItem.title = NSLocalizedString(@"Turn 0/5", nil);
+        }
+        //[buttonUndo setTitle:[NSString stringWithFormat:NSLocalizedString(@"Undo %i/5", nil), turn] forState:UIControlStateNormal];
     };
     [spriteView presentScene:self.helloScene];
 }
@@ -101,6 +108,7 @@
     [self showGameScene];
     [self toggleArmySelection];
 }
+
 - (IBAction)btnPolandPressed:(id)sender {
     self.dictOfGame = [GameLogic initPlayerInGameWithNation:@"poland" forDictOfGame:self.dictOfGame];
     [self showGameScene];
@@ -118,6 +126,10 @@
 
 - (IBAction)btnMenuPressed:(id)sender {
     [self toggleMenu];
+}
+
+- (IBAction)btnReplayPressed:(id)sender {
+    [self.helloScene replayMoves];
 }
 
 -(void) toggleArmySelection {
@@ -145,7 +157,10 @@
 }
 
 -(void) sendGameToServer {
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.helloScene.gameObj.dictOfGame];
+    NSMutableDictionary *dictWithGameAndMoves = [NSMutableDictionary dictionaryWithDictionary:self.helloScene.gameObj.dictOfGame];
+    [dictWithGameAndMoves setObject:self.helloScene.arrayOfMoves forKey:@"lastMoves"];
+    [dictWithGameAndMoves setObject:self.helloScene.downloadedGameObj.dictOfGame forKey:@"initialTable"];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dictWithGameAndMoves];
     GKTurnBasedParticipant *oppositePart;
     for (GKTurnBasedParticipant *part in self.match.participants) {
         if (![[GKLocalPlayer localPlayer].playerID isEqualToString:part.playerID]) {

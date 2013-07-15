@@ -15,7 +15,7 @@
 @property BOOL contentCreated;
 @property int horizontalStep;
 @property int verticalStep;
-
+@property (copy, nonatomic) void (^callBackTemp) (NSInteger);
 @property BOOL moving;
 @property (strong) NSArray *unitWasSelectedPosition;
 @property (strong) NSMutableArray *arrayOfStates;
@@ -24,7 +24,7 @@
 @property BOOL bankSelected;
 @property NSString *unitNameSelectedInBank;
 @property (strong) SKSpriteNode *selectedSprite;
-@property (strong) GameDictProcessor *downloadedGameObj;
+
 @property SKTextureAtlas *unitsAtlasUkraine;
 @property SKTextureAtlas *unitsAtlasPoland;
 @property GameLogic *gameLogic;
@@ -283,7 +283,6 @@
                     [self removeAllChildren];
                     self.callBackBlockTurnMade(self.arrayOfMoves.count);
                     [self initObject];
-                    self.unitNameSelectedInBank = nil;
                     self.unitWasSelectedPosition = nil;
                     
                     //show label with damage value
@@ -291,7 +290,7 @@
                         SKLabelNode *labelHealing = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
                         labelHealing.fontColor = [UIColor redColor];
                         labelHealing.fontSize = 20;
-                        labelHealing.text = [NSString stringWithFormat:@"+%@", [damageValue stringValue]];
+                        labelHealing.text = [NSString stringWithFormat:@"-%@", [damageValue stringValue]];
                         CGPoint targetPoint = [self.gameLogic gameToUIKitCoordinate:targetPosition];
                         targetPoint.y = targetPoint.y + 30;
                         labelHealing.position = targetPoint;
@@ -381,26 +380,37 @@
 
 -(void) replayMoves {
     NSArray *arrayLastMoves = [NSMutableArray arrayWithArray:[self.gameObj arrayOfPreviousMoves]];
-    GameDictProcessor *initialGameObj = [[GameDictProcessor alloc] initWithDictOfGame:[[self.downloadedGameObj initialTable] objectForKey:@"game"] gameLogic:self.gameLogic];
+    GameDictProcessor *initialGameObj = [[GameDictProcessor alloc] initWithDictOfGame:[self.downloadedGameObj initialTable] gameLogic:self.gameLogic];
     self.gameObj = initialGameObj;
+    self.arrayOfMoves = [NSMutableArray array];
+    self.arrayOfStates = [NSMutableArray array];
+    [self.arrayOfStates addObject:initialGameObj.dictOfGame];
     [self removeAllChildren];
+    //save callback in temp variable to restore it after replay is done.
+    //this is needed as we have different callbacks for the same action - move is done.
+    self.callBackTemp = self.callBackBlockTurnMade;
+    self.callBackBlockTurnMade = self.callBackBlockReplayTurnMade;
     [self initObject];
-    
     [self makeMoveFromReplay:self.gameObj arrayOfMoves:[NSMutableArray arrayWithArray:arrayLastMoves]];
     
 }
 
 -(void) makeMoveFromReplay:(GameDictProcessor *) gameObject arrayOfMoves:(NSMutableArray *) arrayLastMoves {
     if (arrayLastMoves.count == 0) {
-        self.unitNameSelectedInBank = nil;
-        self.unitWasSelectedPosition = nil;
-        self.bankSelected = NO;
-        self.arrayOfMoves = [[NSMutableArray alloc] init];
-        self.arrayOfStates = [[NSMutableArray alloc] init];
-        [self.arrayOfStates addObject:self.downloadedGameObj.dictOfGame];
-        [self removeAllChildren];
-        self.gameObj = self.downloadedGameObj;
-        [self initObject];
+        double delayInSeconds = 1.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            self.callBackBlockTurnMade = self.callBackTemp;
+            self.unitNameSelectedInBank = nil;
+            self.unitWasSelectedPosition = nil;
+            self.bankSelected = NO;
+            self.arrayOfMoves = [[NSMutableArray alloc] init];
+            self.arrayOfStates = [[NSMutableArray alloc] init];
+            [self.arrayOfStates addObject:self.downloadedGameObj.dictOfGame];
+            [self removeAllChildren];
+            self.gameObj = self.downloadedGameObj;
+            [self initObject];
+        });
         return;
     }
     //move[0] contains always init position of unit
@@ -418,8 +428,7 @@
                     [Animator animateSpriteDeselection:self.selectedSprite];
                     self.selectedSprite = sprite;
                 }
-            }
-            
+            }            
             NSLog(@"kuku");
             double delayInSeconds = 1;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));

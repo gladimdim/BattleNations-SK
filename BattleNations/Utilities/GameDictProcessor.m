@@ -143,11 +143,11 @@
 }
 
 -(NSDictionary *) initialTable {
-    return (NSDictionary *) [self.dictOfGame objectForKey:@"initial_table"];
+    return (NSDictionary *) [self.dictOfGame objectForKey:@"initialTable"];
 }
 
 -(NSArray *) arrayOfPreviousMoves {
-    return (NSArray *) [self.dictOfGame objectForKey:@"last_moves"];
+    return (NSArray *) [self.dictOfGame objectForKey:@"lastMoves"];
 }
 
 -(NSString *) oppositePlayerID:(NSString *) currentPlayerID {
