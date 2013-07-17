@@ -43,6 +43,8 @@
 		F25619D017690A9600008E34 /* flag_poland.png in Resources */ = {isa = PBXBuildFile; fileRef = F25619CE17690A9600008E34 /* flag_poland.png */; };
 		F25619D117690A9600008E34 /* flag_ukraine.png in Resources */ = {isa = PBXBuildFile; fileRef = F25619CF17690A9600008E34 /* flag_ukraine.png */; };
 		F25619D517690C9D00008E34 /* battle-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F25619D317690C5900008E34 /* battle-icon.png */; };
+		F2A72208179724ED00407953 /* FogOfWar.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2A72207179724ED00407953 /* FogOfWar.sks */; };
+		F2A7220C17972BBE00407953 /* cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = F2A7220B17972BBE00407953 /* cloud.png */; };
 		F2F3E8C7176CD3A30080042C /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F3E8C6176CD3A30080042C /* GameKit.framework */; };
 		F2F3E990176DACCE0080042C /* poland_units.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F2F3E98F176DACCE0080042C /* poland_units.atlas */; };
 /* End PBXBuildFile section */
@@ -114,6 +116,8 @@
 		F25619CE17690A9600008E34 /* flag_poland.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flag_poland.png; path = Resources/flags/flag_poland.png; sourceTree = "<group>"; };
 		F25619CF17690A9600008E34 /* flag_ukraine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flag_ukraine.png; path = Resources/flags/flag_ukraine.png; sourceTree = "<group>"; };
 		F25619D317690C5900008E34 /* battle-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "battle-icon.png"; path = "Resources/Accessory/battle-icon.png"; sourceTree = "<group>"; };
+		F2A72207179724ED00407953 /* FogOfWar.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = FogOfWar.sks; path = Resources/Particles/FogOfWar.sks; sourceTree = "<group>"; };
+		F2A7220B17972BBE00407953 /* cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cloud.png; path = Resources/Particles/cloud.png; sourceTree = "<group>"; };
 		F2F3E8C6176CD3A30080042C /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		F2F3E98F176DACCE0080042C /* poland_units.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = poland_units.atlas; path = Resources/units/poland/poland_units.atlas; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -294,6 +298,7 @@
 		F25619CC17690A8600008E34 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F2A722021797223300407953 /* Particles */,
 				F21A33E217789D1E000DAC84 /* HealthBar.atlas */,
 				F2F3E8C9176CDACC0080042C /* units */,
 				F25619D217690C4600008E34 /* Accessory */,
@@ -317,6 +322,15 @@
 				F25619D317690C5900008E34 /* battle-icon.png */,
 			);
 			name = Accessory;
+			sourceTree = "<group>";
+		};
+		F2A722021797223300407953 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				F2A7220B17972BBE00407953 /* cloud.png */,
+				F2A72207179724ED00407953 /* FogOfWar.sks */,
+			);
+			name = Particles;
 			sourceTree = "<group>";
 		};
 		F2F3E8C9176CDACC0080042C /* units */ = {
@@ -430,11 +444,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F207FC41176DB7180085F8E5 /* ukraine_units.atlas in Resources */,
+				F2A72208179724ED00407953 /* FogOfWar.sks in Resources */,
 				F25619D517690C9D00008E34 /* battle-icon.png in Resources */,
 				F2F3E990176DACCE0080042C /* poland_units.atlas in Resources */,
 				F20688641768EFBD00771F36 /* Main_iPad.storyboard in Resources */,
 				F20688691768EFBD00771F36 /* Images.xcassets in Resources */,
 				F20688611768EFBD00771F36 /* Main_iPhone.storyboard in Resources */,
+				F2A7220C17972BBE00407953 /* cloud.png in Resources */,
 				F25619D117690A9600008E34 /* flag_ukraine.png in Resources */,
 				F21A33E317789D1E000DAC84 /* HealthBar.atlas in Resources */,
 				F25619D017690A9600008E34 /* flag_poland.png in Resources */,

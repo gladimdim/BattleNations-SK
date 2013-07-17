@@ -44,7 +44,7 @@
         self.unitsAtlasUkraine = [SKTextureAtlas atlasNamed:@"ukraine_units"];
         self.unitsAtlasPoland = [SKTextureAtlas atlasNamed:@"poland_units"];
         self.gameLogic = [[GameLogic alloc] initWithBoardSize:size];
-        
+        [self setBackgroundColor:[UIColor whiteColor]];
         [self setAnchorPoint:CGPointMake(0, 0)];
     }
     return self;
@@ -103,6 +103,10 @@
         sprite.position = position;
         [self addChild:sprite];
     }
+    
+    SKEmitterNode *emmiter = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"FogOfWar" ofType:@"sks"]];
+    emmiter.position = CGPointMake(self.frame.size.width, self.frame.size.height/2);
+    [self addChild:emmiter];
 }
 
 -(void) placeUnit:(NSDictionary *) unit forLeftArmy:(BOOL) leftArmy nationName:(NSString *) nationName {
@@ -317,7 +321,6 @@
         for (int i = 0; i < self.children.count; i++) {
             //find old sprite which was selected
             SKSpriteNode *node = (SKSpriteNode *) [self.children objectAtIndex:i];
-            NSLog(@"Checking node: %@", NSStringFromCGPoint(node.position));
             //calculate old CGPoint by using old game coordinates
             CGPoint oldPoint = CGPointMake([initPosition[0] integerValue] * self.horizontalStep + self.horizontalStep/2, [initPosition[1] integerValue] * self.verticalStep + self.verticalStep + self.verticalStep / 2);
             //calculate new position in game coordinates

@@ -184,8 +184,8 @@
 
 -(void) showFogOverlay {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [view setBackgroundColor:[UIColor grayColor]];
-    [view setAlpha:0.5f];
+    [view setBackgroundColor:[UIColor whiteColor]];
+    [view setAlpha:0.8f];
     [view setTag:FOG_VIEW_TAG_ID];
     [self.view addSubview:view];
 }
