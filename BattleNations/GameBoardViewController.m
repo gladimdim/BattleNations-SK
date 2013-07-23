@@ -92,7 +92,7 @@
             else {
                 [self toggleArmySelection];
             }
-            NSLog(@"unarchived dict: %@", dict);
+           // NSLog(@"unarchived dict: %@", dict);
         }
     }];
 }

@@ -19,7 +19,6 @@
     [sprite setColorBlendFactor:0.0f];
 }
 
-
 +(NSArray *) createHealthBarsForFieldInGame:(GameDictProcessor *) gameObj gameLogic:(GameLogic *)gameLogic {
     NSArray *arrayOfAllFields = [gameObj.arrayLeftField arrayByAddingObjectsFromArray:gameObj.arrayRightField];
     NSMutableArray *arrayOfHealthSprites = [[NSMutableArray alloc] initWithCapacity:arrayOfAllFields.count];

@@ -103,10 +103,10 @@
         sprite.position = position;
         [self addChild:sprite];
     }
-    
-    SKEmitterNode *emmiter = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"FogOfWar" ofType:@"sks"]];
+    //uncomment to see clouds
+    /*SKEmitterNode *emmiter = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"FogOfWar" ofType:@"sks"]];
     emmiter.position = CGPointMake(self.frame.size.width, self.frame.size.height/2);
-    [self addChild:emmiter];
+    [self addChild:emmiter];*/
 }
 
 -(void) placeUnit:(NSDictionary *) unit forLeftArmy:(BOOL) leftArmy nationName:(NSString *) nationName {

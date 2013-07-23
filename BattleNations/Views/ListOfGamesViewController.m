@@ -16,7 +16,12 @@
 @property NSArray *arrayOfGames;
 - (IBAction)btnRefreshPressed:(id)sender;
 @property NSArray *arrayOfMatches;
+//array of GKPlayer - used for getting player photos
+@property NSMutableArray *arrayOfGKPlayers;
 @property NSArray *arrayOfPlayersIDs;
+//maps player ids to display names
+@property NSDictionary *dictOfPlayerNames;
+@property NSMutableDictionary *dictOfPlayerPhotos;
 @end
 
 @implementation ListOfGamesViewController
@@ -47,64 +52,61 @@
 }
 
 -(void) getListOfGames {
-   /* ListOfGamesGetter *getter = [[ListOfGamesGetter alloc] init];
-    [getter getListOfGamesFor:[[NSUserDefaults standardUserDefaults] stringForKey:@"playerID"] withCallBack:^(NSDictionary *dict, NSError *err) {
-        if (err) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:err.localizedDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-            return;
-        }
-        //check if returned object is dictionary with error or array with objects.
-        SEL selectorAllKeys = NSSelectorFromString(@"allKeys");
-        if ([dict respondsToSelector:selectorAllKeys]) {// && [dict allKeys].count > 1) {
-            return;
-        }
-        else {
-            NSArray *array = (NSArray *) dict;
-            NSLog(@"amount of games: %i", array.count );
-            NSMutableArray *arrayOfGameDicts = [NSMutableArray array];
-            for (int i = 0; i < array.count; i++) {
-                NSDictionary *game = [array[i] objectForKey:@"game"];
-                GameDictProcessor *gameObj = [[GameDictProcessor alloc] initWithDictOfGame:game gameLogic:nil];
-                [arrayOfGameDicts addObject:gameObj];
-            }
-            self.arrayOfGames = [NSArray arrayWithArray:arrayOfGameDicts];
-            [self.tableView reloadData];
-        }
-    }];*/
-    
     [GKTurnBasedMatch loadMatchesWithCompletionHandler:^(NSArray *matches, NSError *error) {
         if (matches) {
           //  NSLog(@"matched: %@", matches);
             self.arrayOfMatches = matches;
-            NSMutableArray *arrayOfPlayers = [NSMutableArray array];
+            NSMutableArray *arrayOfPlayerIDs = [NSMutableArray array];
             for (GKTurnBasedMatch *match in matches) {
                 NSArray *participants = match.participants;
                 for (GKTurnBasedParticipant *part in participants) {
                     if (part.playerID) {
-                        [arrayOfPlayers addObject:part.playerID];
+                        [arrayOfPlayerIDs addObject:part.playerID];
                     }
                 }
             }
-            self.arrayOfPlayersIDs = arrayOfPlayers;
+            self.arrayOfPlayersIDs = arrayOfPlayerIDs;
+            if (arrayOfPlayerIDs) {
+                [self loadPlayerIDs];
+            }
+            
             [self.tableView reloadData];
-           // [self loadPlayerIDs];
         }
     }];
 }
 
 -(void) loadPlayerIDs {
     [GKPlayer loadPlayersForIdentifiers:self.arrayOfPlayersIDs withCompletionHandler:^(NSArray *players, NSError *error) {
-        if (error !=nil) {
+        if (!error) {
+            self.arrayOfGKPlayers = [NSMutableArray array];
+            NSMutableDictionary *dict = [NSMutableDictionary dictionary];
             for (GKPlayer *player in players) {
-                NSLog(@"player names: %@", player.displayName);
+                [dict setObject:player.displayName forKey:player.playerID];
+                [self.arrayOfGKPlayers addObject:player];
             }
+            self.dictOfPlayerNames = dict;
+            [self updatePhotosOfUsers];
+            [self.tableView reloadData];
         }
         else {
             NSLog(@"error during loading player ids: %@", error.localizedDescription);
         }
     }];
+}
 
+-(void) updatePhotosOfUsers {
+    self.dictOfPlayerPhotos = [NSMutableDictionary dictionary];
+    for (GKPlayer *player in self.arrayOfGKPlayers) {
+        [player loadPhotoForSize:GKPhotoSizeSmall withCompletionHandler:^(UIImage *photo, NSError *error) {
+            if (!error) {
+                [self.dictOfPlayerPhotos setObject:photo forKey:player.playerID];
+                [self.tableView reloadData];
+            }
+            else {
+                NSLog(@"Error %@ loading photo for player: %@", error.localizedDescription, player);
+            }
+        }];
+    }
 }
 
 #pragma mark - UITableView Datasource
@@ -138,17 +140,17 @@
 
     GKTurnBasedParticipant *part1 = participants[0];
     UILabel *labelLeft = (UILabel *) [cell viewWithTag:2];
-    labelLeft.text = part1.playerID;
+    labelLeft.text = self.arrayOfPlayersIDs ? [self.dictOfPlayerNames objectForKey:part1.playerID] : part1.playerID;
     GKTurnBasedParticipant *part2 = (GKTurnBasedParticipant *) participants[1];
     UILabel *labelRight = (UILabel *) [cell viewWithTag:3];
-    labelRight.text = part2.playerID;
+    labelRight.text = self.arrayOfPlayersIDs ? [self.dictOfPlayerNames objectForKey:part2.playerID] : part2.playerID;
     
-  /*  UIImageView *leftImage = (UIImageView *) [cell viewWithTag:1];
-    leftImage.image = [gameObj imageForLeftPlayersNation];
+    UIImageView *leftImage = (UIImageView *) [cell viewWithTag:1];
+    leftImage.image = [self.dictOfPlayerPhotos objectForKey:part1.playerID];
     
     UIImageView *rightImage = (UIImageView *) [cell viewWithTag:4];
-    rightImage.image = [gameObj imageForRightPlayersNation];
-*/
+    rightImage.image = [self.dictOfPlayerPhotos objectForKey:part2.playerID];
+
     return cell;
 }
 
