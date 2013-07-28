@@ -135,11 +135,12 @@
 -(void) toggleArmySelection {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5f];
-    if (self.armySelectionView.frame.origin.y >= 500) {
-        [self.armySelectionView setFrame:CGRectMake(145, 145, 200, 75)];
+    
+    if (self.armySelectionView.frame.origin.x >= self.view.frame.size.width) {
+        [self.armySelectionView setFrame:CGRectMake(self.view.frame.size.width / 2 - 100, (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 75 : 0, 200, 75)];
     }
     else {
-        [self.armySelectionView setFrame:CGRectMake(145, 600, 200, 75)];
+        [self.armySelectionView setFrame:CGRectMake(self.view.frame.size.width + 200, (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 75 : 0, 200, 75)];
     }
     [UIView commitAnimations];
 }
@@ -147,11 +148,12 @@
 -(void) toggleMenu {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5f];
-    if (self.menuView.frame.origin.y < 0) {
-        [self.menuView setFrame:CGRectMake(280, 0, 200, 100)];
+    NSLog(@"menuview: %@", NSStringFromCGRect(self.menuView.frame));
+    if (self.menuView.frame.origin.x >= self.view.frame.size.width) {
+        [self.menuView setFrame:CGRectMake(self.view.frame.size.width - 150, (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 75 : 0, 150, 120)];
     }
     else {
-        [self.menuView setFrame:CGRectMake(280, -400, 200, 100)];
+        [self.menuView setFrame:CGRectMake(self.view.frame.size.width + 150, (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 75 : 0, 150, 120)];
     }
     [UIView commitAnimations];
 }
