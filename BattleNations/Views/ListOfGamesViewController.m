@@ -146,10 +146,10 @@
     labelRight.text = self.arrayOfPlayersIDs ? [self.dictOfPlayerNames objectForKey:part2.playerID] : part2.playerID;
     
     UIImageView *leftImage = (UIImageView *) [cell viewWithTag:1];
-    leftImage.image = [self.dictOfPlayerPhotos objectForKey:part1.playerID];
+    //leftImage.image = ;//[self.dictOfPlayerPhotos objectForKey:part1.playerID];
     
     UIImageView *rightImage = (UIImageView *) [cell viewWithTag:4];
-    rightImage.image = [self.dictOfPlayerPhotos objectForKey:part2.playerID];
+   // rightImage.image = ;// [self.dictOfPlayerPhotos objectForKey:part2.playerID];
 
     return cell;
 }

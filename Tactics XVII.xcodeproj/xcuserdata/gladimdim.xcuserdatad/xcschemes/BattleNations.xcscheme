@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F20688491768EFBD00771F36"
-               BuildableName = "BattleNations.app"
-               BlueprintName = "BattleNations"
-               ReferencedContainer = "container:BattleNations.xcodeproj">
+               BuildableName = "Tactics XVII.app"
+               BlueprintName = "Tactics XVII"
+               ReferencedContainer = "container:Tactics XVII.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F206886D1768EFBD00771F36"
-               BuildableName = "BattleNationsTests.xctest"
-               BlueprintName = "BattleNationsTests"
-               ReferencedContainer = "container:BattleNations.xcodeproj">
+               BuildableName = "Tactics XVIITests.xctest"
+               BlueprintName = "Tactics XVIITests"
+               ReferencedContainer = "container:Tactics XVII.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F20688491768EFBD00771F36"
-            BuildableName = "BattleNations.app"
-            BlueprintName = "BattleNations"
-            ReferencedContainer = "container:BattleNations.xcodeproj">
+            BuildableName = "Tactics XVII.app"
+            BlueprintName = "Tactics XVII"
+            ReferencedContainer = "container:Tactics XVII.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F20688491768EFBD00771F36"
-            BuildableName = "BattleNations.app"
-            BlueprintName = "BattleNations"
-            ReferencedContainer = "container:BattleNations.xcodeproj">
+            BuildableName = "Tactics XVII.app"
+            BlueprintName = "Tactics XVII"
+            ReferencedContainer = "container:Tactics XVII.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F20688491768EFBD00771F36"
-            BuildableName = "BattleNations.app"
-            BlueprintName = "BattleNations"
-            ReferencedContainer = "container:BattleNations.xcodeproj">
+            BuildableName = "Tactics XVII.app"
+            BlueprintName = "Tactics XVII"
+            ReferencedContainer = "container:Tactics XVII.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

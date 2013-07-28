@@ -39,7 +39,6 @@
 		F25619C81769012E00008E34 /* Animator.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619C11769012E00008E34 /* Animator.m */; };
 		F25619C91769012E00008E34 /* GameDictProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619C31769012E00008E34 /* GameDictProcessor.m */; };
 		F25619CA1769012E00008E34 /* GameLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619C51769012E00008E34 /* GameLogic.m */; };
-		F25619CB1769012E00008E34 /* RecordPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F25619C71769012E00008E34 /* RecordPlayer.m */; };
 		F25619D017690A9600008E34 /* flag_poland.png in Resources */ = {isa = PBXBuildFile; fileRef = F25619CE17690A9600008E34 /* flag_poland.png */; };
 		F25619D117690A9600008E34 /* flag_ukraine.png in Resources */ = {isa = PBXBuildFile; fileRef = F25619CF17690A9600008E34 /* flag_ukraine.png */; };
 		F25619D517690C9D00008E34 /* battle-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F25619D317690C5900008E34 /* battle-icon.png */; };
@@ -111,8 +110,6 @@
 		F25619C31769012E00008E34 /* GameDictProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameDictProcessor.m; path = Utilities/GameDictProcessor.m; sourceTree = "<group>"; };
 		F25619C41769012E00008E34 /* GameLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameLogic.h; path = Utilities/GameLogic.h; sourceTree = "<group>"; };
 		F25619C51769012E00008E34 /* GameLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameLogic.m; path = Utilities/GameLogic.m; sourceTree = "<group>"; };
-		F25619C61769012E00008E34 /* RecordPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RecordPlayer.h; path = Utilities/RecordPlayer.h; sourceTree = "<group>"; };
-		F25619C71769012E00008E34 /* RecordPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RecordPlayer.m; path = Utilities/RecordPlayer.m; sourceTree = "<group>"; };
 		F25619CE17690A9600008E34 /* flag_poland.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flag_poland.png; path = Resources/flags/flag_poland.png; sourceTree = "<group>"; };
 		F25619CF17690A9600008E34 /* flag_ukraine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flag_ukraine.png; path = Resources/flags/flag_ukraine.png; sourceTree = "<group>"; };
 		F25619D317690C5900008E34 /* battle-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "battle-icon.png"; path = "Resources/Accessory/battle-icon.png"; sourceTree = "<group>"; };
@@ -276,8 +273,6 @@
 				F25619C31769012E00008E34 /* GameDictProcessor.m */,
 				F25619C41769012E00008E34 /* GameLogic.h */,
 				F25619C51769012E00008E34 /* GameLogic.m */,
-				F25619C61769012E00008E34 /* RecordPlayer.h */,
-				F25619C71769012E00008E34 /* RecordPlayer.m */,
 			);
 			name = utilities;
 			sourceTree = "<group>";
@@ -478,7 +473,6 @@
 				F25619B1176900CB00008E34 /* ListOfGamesGetter.m in Sources */,
 				F25619BF1769011F00008E34 /* UkraineInfo.m in Sources */,
 				F25619B2176900CB00008E34 /* NewGame.m in Sources */,
-				F25619CB1769012E00008E34 /* RecordPlayer.m in Sources */,
 				F25619BD1769011F00008E34 /* ArmyBuilder.m in Sources */,
 				F25619B3176900CB00008E34 /* UserRegister.m in Sources */,
 				F25619C91769012E00008E34 /* GameDictProcessor.m in Sources */,
