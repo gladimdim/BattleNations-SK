@@ -174,29 +174,6 @@
 /*****************************************/
 
 
-- (IBAction)btnUkrainePressed:(id)sender {
-    [self startNewGameWithNation:@"ukraine"];
-}
-- (IBAction)btnPolandPressed:(id)sender {
-    [self startNewGameWithNation:@"poland"];
-}
-
--(void) startNewGameWithNation:(NSString *) nation {
-    NewGame *game = [[NewGame alloc] init];
-    [game askForNewGameForUser:[[NSUserDefaults standardUserDefaults] stringForKey:@"playerID"]  withEmail:[[NSUserDefaults standardUserDefaults] stringForKey:@"email"] forNation:nation callBack:^(NSDictionary *returnDict, NSError *err) {
-        NSLog(@"created new game: %@", returnDict);
-        if (err) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error occurred", nil) message:[err localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-            return;
-        }
-        else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Player put into queue", nil) message:[err localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-        }
-    }];
-}
-
 - (void) authenticateLocalPlayer
 {
     GKLocalPlayer *lPlayer = [GKLocalPlayer localPlayer];

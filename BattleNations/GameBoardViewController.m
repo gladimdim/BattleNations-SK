@@ -48,12 +48,11 @@
         [self showFogOverlay];
     }
     [self.btnUndo setTitle:[NSString stringWithFormat:NSLocalizedString(@"Undo %i/5", nil), 0] forState:UIControlStateNormal];
-
+    [self checkIfFirstMove];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self checkIfFirstMove];
 }
 
 -(void) showGameScene {
@@ -135,13 +134,14 @@
 -(void) toggleArmySelection {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5f];
-    
+    NSLog(@"army selection view: %@", NSStringFromCGRect(self.armySelectionView.frame));
     if (self.armySelectionView.frame.origin.x >= self.view.frame.size.width) {
         [self.armySelectionView setFrame:CGRectMake(self.view.frame.size.width / 2 - 100, (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 75 : 0, 200, 75)];
     }
     else {
         [self.armySelectionView setFrame:CGRectMake(self.view.frame.size.width + 200, (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 75 : 0, 200, 75)];
     }
+    NSLog(@"army selection view: %@", NSStringFromCGRect(self.armySelectionView.frame));
     [UIView commitAnimations];
 }
 
@@ -193,3 +193,6 @@
 }
 
 @end
+
+
+
