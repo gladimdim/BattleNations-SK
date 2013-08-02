@@ -18,24 +18,9 @@
    // [[NSUserDefaults standardUserDefaults] setObject:@"savetko" forKey:@"playerID"];
    // [[NSUserDefaults standardUserDefaults] setObject:@"sv" forKey:@"email"];
    
-    /*********Register for APNS**********/
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     return YES;
 }
 
--(void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    NSLog(@"My device token: %@", deviceToken);
-    NSString *strDeviceToken =  [[deviceToken description] stringByReplacingOccurrencesOfString:@"<" withString:@""];
-    strDeviceToken = [strDeviceToken stringByReplacingOccurrencesOfString:@">" withString:@""];
-    strDeviceToken = [strDeviceToken stringByReplacingOccurrencesOfString:@" " withString:@""];
-    [[NSUserDefaults standardUserDefaults] setObject:strDeviceToken forKey:@"deviceToken"];
-}
-
--(void) application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    NSLog(@"APNS could not be registered.");
-}
-
-							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
