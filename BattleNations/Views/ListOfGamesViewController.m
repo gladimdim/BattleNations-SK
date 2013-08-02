@@ -85,7 +85,7 @@
                 [self.arrayOfGKPlayers addObject:player];
             }
             self.dictOfPlayerNames = dict;
-            [self updatePhotosOfUsers];
+            //[self updatePhotosOfUsers];
             [self.tableView reloadData];
         }
         else {
