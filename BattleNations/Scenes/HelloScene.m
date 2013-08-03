@@ -44,7 +44,7 @@
         self.unitsAtlasUkraine = [SKTextureAtlas atlasNamed:@"ukraine_units"];
         self.unitsAtlasPoland = [SKTextureAtlas atlasNamed:@"poland_units"];
         self.gameLogic = [[GameLogic alloc] initWithBoardSize:size];
-        [self setBackgroundColor:[UIColor whiteColor]];
+        [self setBackgroundColor:[UIColor grayColor]];
         [self setAnchorPoint:CGPointMake(0, 0)];
     }
     return self;

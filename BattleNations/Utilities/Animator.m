@@ -24,12 +24,19 @@
     NSMutableArray *arrayOfHealthSprites = [[NSMutableArray alloc] initWithCapacity:arrayOfAllFields.count];
     for (int i = 0; i < arrayOfAllFields.count; i++) {
         NSInteger health =  [gameObj getHealthLevelForUnit:arrayOfAllFields[i]];
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:health > 50 ? @"health-bar-100.png" : @"health-bar-20.png"];
+       
+        SKLabelNode *labelHealth = [SKLabelNode labelNodeWithFontNamed:@"Arial Bold"];
+        labelHealth.text = [NSString stringWithFormat:@"Health :%i", health];
+        labelHealth.blendMode = SKBlendModeReplace;
+        labelHealth.fontColor = [UIColor whiteColor];
+        labelHealth.fontSize = 10.0;
+        labelHealth.color = [UIColor redColor];
+        labelHealth.colorBlendFactor = (100.0 - health) / 100.0;
         NSArray *coords = [gameObj getCoordsForUnit:arrayOfAllFields[i]];
         CGPoint centerPosition = [gameLogic gameToUIKitCoordinate:coords];
-        centerPosition.y = centerPosition.y + [gameLogic verticalStep] / 2;
-        sprite.position = centerPosition;
-        [arrayOfHealthSprites addObject:sprite];
+        centerPosition.y = centerPosition.y + [gameLogic verticalStep] / 2 + 10;
+        labelHealth.position = centerPosition;
+        [arrayOfHealthSprites addObject:labelHealth];
     }
     return arrayOfHealthSprites;
 }
