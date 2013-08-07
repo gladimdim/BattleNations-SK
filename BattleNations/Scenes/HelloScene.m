@@ -305,6 +305,20 @@
                         [labelHealing runAction:sequence completion:^(void) {
                             [labelHealing removeFromParent];
                         }];
+                        
+                        for (int i = 0; i < self.children.count; i++) {
+                            //find old sprite which was selected
+                            SKSpriteNode *node = (SKSpriteNode *) [self.children objectAtIndex:i];
+                            //calculate old CGPoint by using old game coordinates
+                            CGPoint oldPoint = CGPointMake([initPosition[0] integerValue] * self.horizontalStep + self.horizontalStep/2, [initPosition[1] integerValue] * self.verticalStep + self.verticalStep + self.verticalStep / 2);
+                            //calculate new position in game coordinates
+                            NSArray *newGameCoordinates = [self.gameLogic kitToGameCoordinate:touchPoint];
+                            if (CGRectContainsPoint(node.frame, oldPoint)) {
+                                [Animator animateSpriteAttack:node];
+                            }
+                        }
+
+                        
                     }
 
                 }

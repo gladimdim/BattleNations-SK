@@ -41,4 +41,16 @@
     return arrayOfHealthSprites;
 }
 
++(void) animateSpriteAttack:(SKSpriteNode *) sprite {
+    NSMutableArray *frames = [NSMutableArray array];
+    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ukraine_infantry"];
+    for (int i = 1; i < 9; i++) {
+        NSString *filename = [NSString stringWithFormat:@"attack_00%i.png", i];
+        SKTexture *texture = [atlas textureNamed:filename];
+        [frames addObject:texture];
+    }
+    SKAction *action = [SKAction animateWithTextures:frames timePerFrame:0.2];
+    [sprite runAction:action];
+}
+
 @end

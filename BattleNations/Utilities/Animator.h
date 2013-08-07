@@ -15,4 +15,5 @@
 +(void) animateSpriteSelection:(SKSpriteNode *) sprite;
 +(void) animateSpriteDeselection:(SKSpriteNode *) sprite;
 +(NSArray *) createHealthBarsForFieldInGame:(GameDictProcessor *) gameObj gameLogic:(GameLogic *) gameLogic;
++(void) animateSpriteAttack:(SKSpriteNode *) sprite;
 @end
